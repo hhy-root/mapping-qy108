@@ -2,6 +2,7 @@ package com.aaa.six.controller;
 
 import com.aaa.six.model.User;
 import com.aaa.six.redis.RedisService;
+import com.aaa.six.service.LoginService;
 import com.aaa.six.vo.TokenVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

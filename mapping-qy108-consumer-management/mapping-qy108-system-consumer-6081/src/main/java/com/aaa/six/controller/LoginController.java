@@ -38,6 +38,7 @@ public class LoginController extends BaseController {
      */
     @PostMapping("/doLogin")
     @ApiOperation(value = "登录功能", notes = "用户执行登录功能")
+    @LoginLogAnnotation(operationType = "登录操作",operationName = "管理员登录")
     public ResultData doLogin(User user){
         TokenVo tokenVo = qyService.doLogin(user);
         if(tokenVo.getIfSuccess()) {

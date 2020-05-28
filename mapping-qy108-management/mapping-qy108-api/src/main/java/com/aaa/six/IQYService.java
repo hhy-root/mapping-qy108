@@ -1,6 +1,8 @@
 package com.aaa.six;
 
+import com.aaa.six.base.ResultData;
 import com.aaa.six.model.Dept;
+import com.aaa.six.model.Dict;
 import com.aaa.six.model.MappingProject;
 import com.aaa.six.model.User;
 import com.aaa.six.vo.TokenVo;
@@ -9,6 +11,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Company AAA软件教育
@@ -197,4 +200,158 @@ public interface IQYService {
      */
     @PostMapping("/mappingProjectByPage")
     PageInfo queryListByPage(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
+
+    /**
+     * @author lwq
+     * @description
+     *    分页查询用户信息
+     * @param: [pageNo, pageSize]
+     * @date 2020/5/27
+     * @return com.github.pagehelper.PageInfo<com.aaa.six.model.User>
+     * @throws
+     **/
+    @PostMapping("/selectUserInfo")
+    PageInfo<User> selectUserInfo(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
+
+    /**
+     * @author lwq
+     * @description
+     *    根据id查询用户信息
+     * @param: [user]
+     * @date 2020/5/27
+     * @return com.aaa.six.model.User
+     * @throws
+     **/
+    @PostMapping("/selectInfoById")
+    User selectInfoById(@RequestBody User user);
+
+    /**
+     * @author lwq
+     * @description
+     *    根据id删除用户
+     * @param: [user]
+     * @date 2020/5/27
+     * @return java.lang.Boolean
+     * @throws
+     **/
+    @PostMapping("/deleteUserById")
+    Boolean deleteUserById(@RequestBody User user);
+
+    /**
+     * @author lwq
+     * @description
+     *    新增用户信息
+     * @param: [user]
+     * @date 2020/5/27
+     * @return java.lang.Boolean
+     * @throws
+     **/
+    @PostMapping("/addUser")
+    Boolean addUser(@RequestBody User user);
+    /**
+     * @author lwq
+     * @description
+     *    修改用户信息
+     * @param: [user]
+     * @date 2020/5/27
+     * @return java.lang.Boolean
+     * @throws
+     **/
+    @PostMapping("/updateUser")
+    Boolean updateUser(@RequestBody User user);
+    /**
+     * @author lwq
+     * @description
+     *    批量删除用户
+     * @param: [ids]
+     * @date 2020/5/27
+     * @return java.lang.Integer
+     * @throws
+     **/
+    @PostMapping("/deleteUserByIds")
+    Integer deleteUserByIds(@RequestBody List<Object> ids);
+
+    /**
+     * @author lwq
+     * @description
+     *    分页查询字典信息
+     * @param: [pageNo, pageSize]
+     * @date 2020/5/27
+     * @return com.github.pagehelper.PageInfo<com.aaa.six.model.Dict>
+     * @throws
+     **/
+    @PostMapping("/selectDictInfo")
+    PageInfo<Dict> selectDictInfo(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
+
+    /**
+     * @author lwq
+     * @description
+     *    新增字典信息
+     * @param: [dict]
+     * @date 2020/5/27
+     * @return java.lang.Boolean
+     * @throws
+     **/
+    @PostMapping("/addDict")
+    Boolean addDict(@RequestBody Dict dict);
+
+    /**
+     * @author lwq
+     * @description
+     *    根据id查询字典信息
+     * @param: [dict]
+     * @date 2020/5/27
+     * @return com.aaa.six.model.Dict
+     * @throws
+     **/
+    @PostMapping("/selectDictById")
+    Dict selectDictById(@RequestBody Dict dict);
+
+    /**
+     * @author lwq
+     * @description
+     *    修改字典信息
+     * @param: [dict]
+     * @date 2020/5/27
+     * @return java.lang.Boolean
+     * @throws
+     **/
+    @PostMapping("/updateDict")
+    Boolean updateDict(@RequestBody Dict dict);
+
+    /**
+     * @author lwq
+     * @description
+     *    根据id删除字典信息
+     * @param: [dict]
+     * @date 2020/5/27
+     * @return java.lang.Boolean
+     * @throws
+     **/
+    @PostMapping("/deleteDictById")
+    Boolean deleteDictById(@RequestBody Dict dict);
+
+    /**
+     * @author lwq
+     * @description
+     *    批量删除字典信息
+     * @param: [ids]
+     * @date 2020/5/27
+     * @return java.lang.Integer
+     * @throws
+     **/
+    @PostMapping("/deleteDictByIds")
+    Integer deleteDictByIds(@RequestBody List<Object> ids);
+
+    /**
+     * @author lwq
+     * @description
+     *    添加登录日志信息
+     * @param: [map]
+     * @date 2020/5/28
+     * @return com.aaa.six.base.ResultData
+     * @throws
+     **/
+    @PostMapping("/addLoginLog")
+    ResultData addLoginLog(@RequestBody Map map);
 }

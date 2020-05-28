@@ -116,8 +116,8 @@ public class UserController {
      * @return java.lang.Integer
      * @throws
      **/
-    @PostMapping("/delByIds")
-    public Integer delByIds(@RequestBody List<Object> ids){
-        return userService.delByIds(ids);
+    @PostMapping("/deleteUserByIds")
+    public Integer deleteUserByIds(@RequestBody List<Object> ids){
+        return userService.deleteUserByIds(ids);
     }
 }
