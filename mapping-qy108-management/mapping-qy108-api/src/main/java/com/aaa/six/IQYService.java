@@ -272,6 +272,43 @@ public interface IQYService {
     Integer deleteUserByIds(@RequestBody List<Object> ids);
 
     /**
+     * 用户分页条件查询
+     * @param user
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
+    @PostMapping("/selectUserByField")
+    PageInfo selectUserByField(@RequestBody User user, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
+
+    /**
+     * 根据用户性别查询用户信息
+     * @param ssex
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
+    @GetMapping("/selectUserBySsex")
+    PageInfo selectUserBySsex(@RequestParam("ssex") String ssex,@RequestParam("pageNo") Integer pageNo,@RequestParam("pageSize") Integer pageSize);
+
+    /**
+     * 根据用户状态查询用户信息
+     * @param status
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
+    @GetMapping("/selectUserBySta")
+    PageInfo selectUserBySta(@RequestParam("status") String status,@RequestParam("pageNo") Integer pageNo,@RequestParam("pageSize") Integer pageSize);
+
+    /**
+     * 重置密码
+     * @param user
+     * @return
+     */
+    @PostMapping("/resetUserPwd")
+    Integer resetUserPwd(@RequestBody User user);
+    /**
      * @author lwq
      * @description
      *    分页查询字典信息
@@ -342,6 +379,17 @@ public interface IQYService {
      **/
     @PostMapping("/deleteDictByIds")
     Integer deleteDictByIds(@RequestBody List<Object> ids);
+
+    /**
+     * 字典信息分页条件查询
+     * @param dict
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
+    @PostMapping("/selectDictByField")
+    PageInfo selectDictByField(@RequestBody Dict dict, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
+
 
     /**
      * @author lwq

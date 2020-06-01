@@ -21,4 +21,31 @@
     <result column="type" property="type" jdbcType="CHAR" />
     <result column="token" property="token" jdbcType="VARCHAR" />
   </resultMap>
+
+  <select id="selectUserByField" resultMap="BaseResultMap" parameterType="com.aaa.six.model.User">
+    SELECT id,username,ssex,email,dept_id,mobile,status,create_time
+    from t_user
+    <where>
+    1=1
+    <if test="username != null and username != ''">
+      AND username=#{username, jdbcType=VARCHAR}
+    </if>
+    <if test="deptId != null and deptId != '' ">
+      AND dept_id=#{deptId, jdbcType=BIGINT}
+    </if>
+  </where>
+  ORDER BY id ASC
+  </select>
+
+  <select id="selectUserBySsex" resultMap="BaseResultMap">
+    select id,username,ssex,email,dept_id,mobile,status,create_time
+    from t_user
+    where ssex= #{ssex,jdbcType=CHAR}
+  </select>
+
+  <select id="selectUserBySta" resultMap="BaseResultMap">
+     select id,username,ssex,email,dept_id,mobile,status,create_time
+    from t_user
+    where status= #{status,jdbcType=CHAR}
+  </select>
 </mapper>

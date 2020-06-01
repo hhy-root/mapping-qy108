@@ -1,13 +1,13 @@
 package com.aaa.six.controller;
 
 
+import com.aaa.six.base.BaseService;
+import com.aaa.six.base.CommonController;
 import com.aaa.six.model.User;
 import com.aaa.six.service.UserService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,11 +20,16 @@ import java.util.List;
  * @Description
  */
 @RestController
-public class UserController {
+public class UserController extends CommonController<User> {
 
     @Autowired
     private UserService userService;
 
+
+    @Override
+    public BaseService<User> getBaseService() {
+        return userService;
+    }
     /**
      * @author lwq
      * @description
@@ -120,4 +125,65 @@ public class UserController {
     public Integer deleteUserByIds(@RequestBody List<Object> ids){
         return userService.deleteUserByIds(ids);
     }
+    
+    /**
+     * @author lwq 
+     * @description
+     *    用户条件分页查询
+     * @param: [username, deptId, pageNo, pageSize]
+     * @date 2020/6/1
+     * @return com.github.pagehelper.PageInfo
+     * @throws 
+     **/
+    @PostMapping("/selectUserByField")
+    public PageInfo selectUserByField(@RequestBody User user, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
+
+        PageInfo pageInfo = userService.selectUserByFiles(user, pageNo, pageSize);
+        if (!"".equals(pageInfo) && null !=pageInfo){
+            return pageInfo;
+        }
+        return null;
+    }
+
+    /**
+     * @author lwq
+     * @description
+     *    根据性别查询用户信息
+     * @param: [ssex, pageNo, pageSize]
+     * @date 2020/6/1
+     * @return com.github.pagehelper.PageInfo
+     * @throws
+     **/
+    @GetMapping("/selectUserBySsex")
+    public PageInfo selectUserBySsex(@RequestParam("ssex") String ssex,@RequestParam("pageNo") Integer pageNo,@RequestParam("pageSize") Integer pageSize){
+        return userService.selectUserBySsex(ssex,pageNo,pageSize);
+    }
+
+    /**
+     * @author lwq
+     * @description
+     *    根据用户状态查询用户信息
+     * @param: [status, pageNo, pageSize]
+     * @date 2020/6/1
+     * @return com.github.pagehelper.PageInfo
+     * @throws
+     **/
+    @GetMapping("/selectUserBySta")
+    public PageInfo selectUserBySta(@RequestParam("status") String status,@RequestParam("pageNo") Integer pageNo,@RequestParam("pageSize") Integer pageSize){
+        return userService.selectUserBySta(status,pageNo,pageSize);
+    }
+    /**
+     * @author lwq
+     * @description
+     *    重置密码
+     * @param: [user]
+     * @date 2020/6/1
+     * @return java.lang.Integer
+     * @throws
+     **/
+    @PostMapping("/resetUserPwd")
+    public Integer resetUserPwd(@RequestBody User user){
+        return userService.resetUserPwd(user);
+    }
+
 }
