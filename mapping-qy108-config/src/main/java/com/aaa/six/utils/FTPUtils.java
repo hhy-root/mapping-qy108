@@ -1,8 +1,10 @@
 package com.aaa.six.utils;
 
+import com.aaa.six.properties.FTPProperties;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,23 +24,27 @@ import java.io.InputStream;
  */
 public class FTPUtils {
 
+
     private FTPUtils(){
 
     }
+
+
+    public  static String temPath="";
 
     public static Boolean uploadFile(String host, Integer port, String username, String password,
                                      String filePath, String basePath, String fileName, InputStream input){
 
         //1.创建临时路径（方便与后面我们需要上传文件的时候，检测日期文件夹是否存在，如果不存在需要进行创建）
         //2020-->2020/05--->2020/05/15(方便拼接这个文件夹目录)
-        String temPath="";
         //2.创建FTPClient对象(这也就是FTP提供给java的API，可以实现连接FTP，登陆FTP，创建文件夹，实现文件上传和下载)
         FTPClient ftp = new FTPClient();
         try{
            //3.连接ftp服务器
             ftp.connect(host,port);
             //4.执行登陆操作
-            ftp.login(username,password);//这一步在java代码中永远不会进cach
+            ftp.login(username,password);
+            //这一步在java代码中永远不会进cach
             //5.验证服务器是否已经连接和登陆成功(如果成功，则返回230，如果失败,则返回530/503)
             int reply = ftp.getReplyCode();
             //6.根据返回的状态码来进行判断用户是否已经登录和连接成功
@@ -57,15 +63,17 @@ public class FTPUtils {
                 // 说明路径不存在，需要进行创建文件夹
                 // java中可是没有mkdir -p命令的 mkdir -p /home/ftp/2020/05/15/，只能一层一层创建
                 // 8.分割filePath--->String[] ---> ["", "2020", "05", "15"]
-                String[] dirs = filePath.split("/");// "//"
+                String[] dirs = filePath.split("/");
                 // 9.把basePath(/home/ftp)赋值给临时路径(tmpPath)
                 temPath =basePath;
                 // 10.循环dirs数组
                 for(String dir : dirs){
                     //严谨判断，判断dir一定不能为null
-                    if(null == dir || "".equals(dir)) continue;//跳过本次循环，进入下次循环
+                    if(null == dir || "".equals(dir)) continue;
+                    //跳过本次循环，进入下次循环
                     //11.拼接临时路径
-                    temPath +="/"+ dir;// /home/ftp/2020
+                    temPath +="/"+ dir;
+                    // :/home/ftp/2020
                     //12.再次检测确保该路径不存在
                     if(!ftp.changeWorkingDirectory(temPath)){
                         //13.创建文件夹
@@ -106,4 +114,8 @@ public class FTPUtils {
         }
         return true ;
     }
+
+
+
+
 }
