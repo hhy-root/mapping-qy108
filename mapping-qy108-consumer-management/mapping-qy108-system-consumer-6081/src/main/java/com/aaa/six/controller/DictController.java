@@ -4,7 +4,6 @@ import com.aaa.six.IQYService;
 import com.aaa.six.base.BaseController;
 import com.aaa.six.base.ResultData;
 import com.aaa.six.model.Dict;
-import com.aaa.six.model.User;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -129,10 +128,28 @@ public class DictController extends BaseController {
     @PostMapping("/deleteDictByIds")
     public ResultData deleteDictByIds(@RequestBody List<Object> ids){
         Integer integer = iqyService.deleteDictByIds(ids);
-        if (integer > 0 ){
+        if (integer !=null ){
             return super.deleteSuccess();
         }else {
             return super.deleteFailed();
         }
+    }
+    /**
+     * @author lwq 
+     * @description
+     *    字典信息分页条件查询
+     * @param: [dict, pageNo, pageSize]
+     * @date 2020/6/1
+     * @return com.aaa.six.base.ResultData
+     * @throws 
+     **/
+    @PostMapping("/selectDictByField")
+    public ResultData selectDictByField(Dict dict, Integer pageNo, Integer pageSize){
+        PageInfo pageInfo = iqyService.selectDictByField(dict, pageNo, pageSize);
+        //判断查询是否成功
+        if (!"".equals(pageInfo) && null !=pageInfo){
+            return super.selectSuccess(pageInfo);
+        }
+        return super.selectFailed();
     }
 }

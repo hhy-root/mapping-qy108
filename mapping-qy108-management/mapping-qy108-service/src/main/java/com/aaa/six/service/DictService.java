@@ -3,14 +3,11 @@ package com.aaa.six.service;
 import com.aaa.six.base.BaseService;
 import com.aaa.six.mapper.DictMapper;
 import com.aaa.six.model.Dict;
-import com.aaa.six.model.User;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -70,7 +67,7 @@ public class DictService extends BaseService<Dict> {
     /**
      * @author lwq 
      * @description
-     *    根据id查询用户详细信息
+     *    根据id查询字典详细信息
      * @param: [dict]
      * @date 2020/5/26
      * @return com.aaa.six.model.Dict
@@ -158,5 +155,35 @@ public class DictService extends BaseService<Dict> {
             }
             return null;
         }
+    }
+
+    /**
+     * @author lwq
+     * @description
+     *      分页条件查询
+     * @param: [dict, pageNo, pageSize]
+     * @date 2020/6/1
+     * @return com.github.pagehelper.PageInfo<com.aaa.six.model.Dict>
+     * @throws
+     **/
+    public PageInfo<Dict> selectDictByFiles(Dict dict, Integer pageNo, Integer pageSize) {
+        PageHelper.startPage(pageNo,pageSize);
+
+        //判断前段是否传值成功
+        try {
+            //使用动态sql查询数据
+            List<Dict> dicts = dictMapper.selectDictByField(dict);
+            //判断是否查询成功
+            if (!"".equals(dicts) && null !=dicts){
+                //将查询结果放入
+                PageInfo<Dict> dictPageInfo = new PageInfo<>(dicts);
+                //返回分页结果
+                return dictPageInfo;
+            }
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

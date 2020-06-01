@@ -7,6 +7,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -122,4 +123,23 @@ public class DictController {
     public Integer deleteDictByIds(@RequestBody List<Object> ids){
         return dictService.deleteDictByIds(ids);
     }
+    
+    /**
+     * @author lwq 
+     * @description
+     *    分页条件查询
+     * @param: [dict, pageNo, pageSize]
+     * @date 2020/6/1
+     * @return com.github.pagehelper.PageInfo
+     * @throws 
+     **/
+    @PostMapping("/selectDictByField")
+    public PageInfo selectDictByField(@RequestBody Dict dict, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
+        PageInfo pageInfo = dictService.selectDictByFiles(dict, pageNo, pageSize);
+        if (!"".equals(pageInfo) && null !=pageInfo){
+            return pageInfo;
+        }
+        return null;
+    }
+
 }

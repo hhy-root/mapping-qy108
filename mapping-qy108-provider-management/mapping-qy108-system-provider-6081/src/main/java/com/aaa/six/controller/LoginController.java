@@ -38,7 +38,15 @@ public class LoginController {
      **/
     @PostMapping("/doLogin")
     public TokenVo doLogin(@RequestBody User user) {
-        return loginService.doLogin(user, redisService);
+        try {
+            TokenVo tokenVo = loginService.doLogin(user, redisService);
+            if (tokenVo.getIfSuccess()){
+                return tokenVo;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

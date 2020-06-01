@@ -8,6 +8,7 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -135,5 +136,78 @@ public class UserController extends BaseController {
         }else {
             return super.deleteFailed();
         }
+    }
+    
+    /**
+     * @author lwq 
+     * @description
+     *    用户条件分页查询
+     * @param: [username, deptId, pageNo, pageSize]
+     * @date 2020/6/1
+     * @return com.aaa.six.base.ResultData
+     * @throws 
+     **/
+    @PostMapping("/selectUserByField")
+    public ResultData selectUserByField(User user, Integer pageNo, Integer pageSize){
+        PageInfo pageInfo = qyService.selectUserByField(user, pageNo, pageSize);
+        //判断查询是否成功
+        if (!"".equals(pageInfo) && null !=pageInfo){
+            return super.selectSuccess(pageInfo);
+        }
+        return super.selectFailed();
+    }
+
+    /**
+     * @author lwq
+     * @description
+     *    根据用户性别查询用户信息
+     * @param: [ssex, pageNo, pageSize]
+     * @date 2020/6/1
+     * @return com.aaa.six.base.ResultData
+     * @throws
+     **/
+    @GetMapping("/selectUserBySsex")
+    public ResultData selectUserBySsex(String ssex, Integer pageNo, Integer pageSize){
+        PageInfo pageInfo = qyService.selectUserBySsex(ssex, pageNo, pageSize);
+        if (!"".equals(pageInfo) && null !=pageInfo){
+            return super.selectSuccess(pageInfo);
+        }
+        return super.selectFailed();
+    }
+
+    /**
+     * @author lwq
+     * @description
+     *    根据状态查询用户信息
+     * @param: [status, pageNo, pageSize]
+     * @date 2020/6/1
+     * @return com.aaa.six.base.ResultData
+     * @throws
+     **/
+    @GetMapping("/selectUserBySta")
+    public ResultData selectUserBySta(String status,Integer pageNo,Integer pageSize){
+        PageInfo pageInfo = qyService.selectUserBySta(status, pageNo, pageSize);
+        if (!"".equals(pageInfo) && null !=pageInfo){
+            return super.selectSuccess(pageInfo);
+        }
+        return super.selectFailed();
+    }
+
+    /**
+     * @author lwq
+     * @description
+     *    重置密码
+     * @param: [user]
+     * @date 2020/6/1
+     * @return com.aaa.six.base.ResultData
+     * @throws
+     **/
+    @PostMapping("/resetUserPwd")
+    public ResultData resetUserPwd(User user){
+        Integer integer = qyService.resetUserPwd(user);
+        if (integer!=null){
+            return super.updateSuccess();
+        }
+        return super.updateFailed();
     }
 }
