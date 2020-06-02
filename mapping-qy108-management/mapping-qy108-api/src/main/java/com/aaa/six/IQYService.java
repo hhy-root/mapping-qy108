@@ -5,7 +5,9 @@ import com.aaa.six.model.*;
 import com.aaa.six.vo.TokenVo;
 import com.github.pagehelper.PageInfo;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -180,7 +182,32 @@ public interface IQYService {
      */
     @PostMapping("/mappingProjectByPage")
     PageInfo queryListByPage(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
+    /**
+     *@Description: TODO
+     * 文件上传
+     *@Param :  [file, rfBizType, refBizId, memo]
+     *@MethodName: uploadFile
+     *@Author: lifuju
+     *@Date: 2020/6/2 16:19
+     *@Return: java.lang.Boolean
+     */
 
+    @PostMapping(value = "/upload",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    Boolean uploadFile(@RequestBody MultipartFile file, @RequestParam("rfBizType") String rfBizType, @RequestParam("refBizId") Long refBizId, @RequestParam("memo") String memo);
+
+    /**
+     *@Description: TODO
+     * 文件下载
+     *@Param :  [localPath, id]
+     *@MethodName: downloadFile
+     *@Author: lifuju
+     *@Date: 2020/5/30 10:37
+     *@Return: java.lang.Boolean
+     */
+    @PostMapping("/download")
+    Boolean download(@RequestParam("localPath") String localPath, @RequestParam("id") Long id);
     /**
      * @return com.github.pagehelper.PageInfo<com.aaa.six.model.User>
      * @throws
