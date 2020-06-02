@@ -1,9 +1,10 @@
 package com.aaa.six.controller;
 
-import com.aaa.six.IQYService;
+
 import com.aaa.six.base.BaseController;
 import com.aaa.six.base.ResultData;
 import com.aaa.six.model.Dict;
+import com.aaa.six.service.IQYDictService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +24,7 @@ import java.util.List;
 public class DictController extends BaseController {
 
     @Autowired
-    private IQYService iqyService;
+    private IQYDictService iqyDictService;
     
     /**
      * @author lwq 
@@ -36,7 +37,7 @@ public class DictController extends BaseController {
      **/
     @PostMapping("/selectDictInfo")
     public ResultData selectDictInfo(Integer pageNo , Integer pageSize){
-        PageInfo<Dict> dictPageInfo = iqyService.selectDictInfo(pageNo, pageSize);
+        PageInfo<Dict> dictPageInfo = iqyDictService.selectDictInfo(pageNo, pageSize);
         if (!"".equals ( dictPageInfo ) && null != dictPageInfo){
             return super.selectSuccess(dictPageInfo);
         }else {
@@ -55,7 +56,7 @@ public class DictController extends BaseController {
      **/
     @PostMapping("/addDict")
     public ResultData addDict(Dict dict){
-        Boolean aBoolean = iqyService.addDict(dict);
+        Boolean aBoolean = iqyDictService.addDict(dict);
         if (aBoolean){
             return super.insertSuccess();
         }
@@ -73,7 +74,7 @@ public class DictController extends BaseController {
      **/
     @PostMapping("/selectDictById")
     public ResultData selectDictById(Dict dict){
-        Dict dict1 = iqyService.selectDictById(dict);
+        Dict dict1 = iqyDictService.selectDictById(dict);
         if (!"".equals(dict1) && null != dict1){
             return super.selectSuccess(dict1);
         }
@@ -91,7 +92,7 @@ public class DictController extends BaseController {
      **/
     @PostMapping("/updateDict")
     public ResultData updateDict(Dict dict){
-        Boolean aBoolean = iqyService.updateDict(dict);
+        Boolean aBoolean = iqyDictService.updateDict(dict);
         if (aBoolean){
             return super.updateSuccess();
 
@@ -110,7 +111,7 @@ public class DictController extends BaseController {
      **/
     @PostMapping("/deleteDictById")
     public ResultData deleteDictById(Dict dict){
-        Boolean aBoolean = iqyService.deleteDictById(dict);
+        Boolean aBoolean = iqyDictService.deleteDictById(dict);
         if (aBoolean){
             return super.deleteSuccess();
         }
@@ -128,7 +129,7 @@ public class DictController extends BaseController {
      **/
     @PostMapping("/deleteDictByIds")
     public ResultData deleteDictByIds(@RequestBody List<Object> ids){
-        Integer integer = iqyService.deleteDictByIds(ids);
+        Integer integer = iqyDictService.deleteDictByIds(ids);
         if (integer !=null ){
             return super.deleteSuccess();
         }else {
@@ -146,7 +147,7 @@ public class DictController extends BaseController {
      **/
     @PostMapping("/selectDictByField")
     public ResultData selectDictByField(Dict dict, Integer pageNo, Integer pageSize){
-        PageInfo pageInfo = iqyService.selectDictByField(dict, pageNo, pageSize);
+        PageInfo pageInfo = iqyDictService.selectDictByField(dict, pageNo, pageSize);
         //判断查询是否成功
         if (!"".equals(pageInfo) && null !=pageInfo){
             return super.selectSuccess(pageInfo);

@@ -1,6 +1,6 @@
 package com.aaa.six.annotation;
 
-import com.aaa.six.IQYService;
+import com.aaa.six.service.IQYService;
 import com.aaa.six.model.User;
 import com.aaa.six.utils.DateUtils;
 import com.aaa.six.utils.IPUtils;

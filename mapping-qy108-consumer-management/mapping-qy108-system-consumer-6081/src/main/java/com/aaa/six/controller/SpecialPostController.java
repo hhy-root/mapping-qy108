@@ -1,9 +1,10 @@
 package com.aaa.six.controller;
 
-import com.aaa.six.IQYService;
+import com.aaa.six.service.IQYService;
 import com.aaa.six.base.BaseController;
 import com.aaa.six.base.ResultData;
 import com.aaa.six.model.SpecialPost;
+import com.aaa.six.service.IQYSpecialPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +23,7 @@ import java.util.List;
 public class SpecialPostController extends BaseController {
 
     @Autowired
-    private IQYService qyService;
+    private IQYSpecialPostService iqySpecialPostService;
 
     /**
      * @author lwq 
@@ -35,7 +36,7 @@ public class SpecialPostController extends BaseController {
      **/
     @PostMapping("/selectSpecialPostInfo")
     public ResultData selectSpecialPostInfo(@RequestParam("userId") Long userId) {
-        List<SpecialPost> specialPosts = qyService.selectSpecialPostInfo(userId);
+        List<SpecialPost> specialPosts = iqySpecialPostService.selectSpecialPostInfo(userId);
         if (specialPosts.size()>0) {
             return selectSuccess(specialPosts);
         }
@@ -53,7 +54,7 @@ public class SpecialPostController extends BaseController {
      **/
     @PostMapping("/addSpecialPost")
     public ResultData addSpecialPost(SpecialPost specialPost){
-        Boolean aBoolean = qyService.addSpecialPost(specialPost);
+        Boolean aBoolean = iqySpecialPostService.addSpecialPost(specialPost);
         if (aBoolean){
             return super.insertSuccess();
         }
@@ -70,7 +71,7 @@ public class SpecialPostController extends BaseController {
      **/
     @PostMapping("/deleteSpecialPost")
     public ResultData deleteSpecialPost(SpecialPost specialPost){
-        Boolean aBoolean = qyService.deleteSpecialPost(specialPost);
+        Boolean aBoolean = iqySpecialPostService.deleteSpecialPost(specialPost);
         if (aBoolean){
             return super.deleteSuccess();
         }
@@ -88,7 +89,7 @@ public class SpecialPostController extends BaseController {
      **/
     @PostMapping("/updateSpecialPost")
     public ResultData updateSpecialPost(SpecialPost specialPost){
-        Boolean aBoolean = qyService.updateSpecialPost(specialPost);
+        Boolean aBoolean = iqySpecialPostService.updateSpecialPost(specialPost);
         if (aBoolean){
             return super.updateSuccess();
 

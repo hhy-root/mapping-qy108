@@ -2,13 +2,11 @@ package com.aaa.six.controller;
 
 import com.aaa.six.base.BaseController;
 import com.aaa.six.base.ResultData;
-import com.aaa.six.IQYService;
+import com.aaa.six.service.IQYPrincipalService;
+import com.aaa.six.service.IQYService;
 import com.aaa.six.model.Principal;
-import com.aaa.six.model.User;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,7 +23,7 @@ import java.util.List;
 public class PrincipalController extends BaseController {
 
     @Autowired
-    private IQYService qyService;
+    private IQYPrincipalService iqyPrincipalService;
 
     /**
      * @author lwq
@@ -38,7 +36,7 @@ public class PrincipalController extends BaseController {
      **/
     @PostMapping("/selectPrincipalInfo")
     public ResultData selectPrincipalInfo(@RequestParam("userId") Long userId) {
-        List<Principal> principals = qyService.selectPrincipalInfo(userId);
+        List<Principal> principals = iqyPrincipalService.selectPrincipalInfo(userId);
         if (principals.size()>0) {
             return selectSuccess(principals);
         }
@@ -56,7 +54,7 @@ public class PrincipalController extends BaseController {
      **/
     @PostMapping("/addPrincipal")
     public ResultData addPrincipal(Principal principal){
-        Boolean aBoolean = qyService.addPrincipal(principal);
+        Boolean aBoolean = iqyPrincipalService.addPrincipal(principal);
         if (aBoolean){
             return super.insertSuccess();
         }
@@ -73,7 +71,7 @@ public class PrincipalController extends BaseController {
      **/
     @PostMapping("/deletePrincipal")
     public ResultData deletePrincipal(Principal principal){
-        Boolean aBoolean = qyService.deletePrincipal(principal);
+        Boolean aBoolean = iqyPrincipalService.deletePrincipal(principal);
         if (aBoolean){
             return super.deleteSuccess();
         }
@@ -91,7 +89,7 @@ public class PrincipalController extends BaseController {
      **/
     @PostMapping("/updatePrincipal")
     public ResultData updatePrincipal(Principal principal){
-        Boolean aBoolean = qyService.updatePrincipal(principal);
+        Boolean aBoolean = iqyPrincipalService.updatePrincipal(principal);
         if (aBoolean){
             return super.updateSuccess();
 

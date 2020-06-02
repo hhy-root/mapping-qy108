@@ -1,9 +1,10 @@
 package com.aaa.six.controller;
 
-import com.aaa.six.IQYService;
+import com.aaa.six.service.IQYService;
 import com.aaa.six.base.BaseController;
 import com.aaa.six.base.ResultData;
 import com.aaa.six.model.User;
+import com.aaa.six.service.IQYUserService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,7 +28,7 @@ import java.util.List;
 public class UserController extends BaseController {
 
     @Autowired
-    private IQYService qyService;
+    private IQYUserService iqyUserService;
 
     /**
      * @author lwq
@@ -41,7 +42,7 @@ public class UserController extends BaseController {
     @PostMapping("/selectUserInfo")
     @ApiOperation(value = "查询功能", notes = "查询项目管理信息")
     public ResultData selectUserInfo(Integer pageNo,Integer pageSize){
-        PageInfo<User> userPageInfo = qyService.selectUserInfo(pageNo, pageSize);
+        PageInfo<User> userPageInfo = iqyUserService.selectUserInfo(pageNo, pageSize);
         if (!"".equals(userPageInfo) && null != userPageInfo){
             return super.selectSuccess(userPageInfo);
         }
@@ -59,7 +60,7 @@ public class UserController extends BaseController {
      **/
     @PostMapping("/selectInfoById")
     public ResultData selectInfoById(User user){
-        User user1 = qyService.selectInfoById(user);
+        User user1 = iqyUserService.selectInfoById(user);
         if (null != user1 && !"".equals(user1)){
             return super.selectSuccess(user1);
         }
@@ -77,7 +78,7 @@ public class UserController extends BaseController {
      **/
     @PostMapping("/deleteUserById")
     public ResultData deleteUserById(User user){
-        Boolean aBoolean = qyService.deleteUserById(user);
+        Boolean aBoolean = iqyUserService.deleteUserById(user);
         if (aBoolean){
             return super.deleteSuccess();
         }
@@ -94,7 +95,7 @@ public class UserController extends BaseController {
      **/
     @PostMapping("/addUser")
     public ResultData addUser(User user){
-        Boolean aBoolean = qyService.addUser(user);
+        Boolean aBoolean = iqyUserService.addUser(user);
         if (aBoolean){
             return super.insertSuccess();
         }
@@ -111,7 +112,7 @@ public class UserController extends BaseController {
      **/
     @PostMapping("/updateUser")
     public ResultData updateUser(User user){
-        Boolean aBoolean = qyService.updateUser(user);
+        Boolean aBoolean = iqyUserService.updateUser(user);
         if (aBoolean){
             return super.updateSuccess();
 
@@ -131,7 +132,7 @@ public class UserController extends BaseController {
      **/
     @PostMapping("/deleteUserByIds")
     public ResultData deleteUserByIds(@RequestBody List<Object> ids){
-        Integer integer = qyService.deleteUserByIds(ids);
+        Integer integer = iqyUserService.deleteUserByIds(ids);
         if (integer > 0 ){
             return super.deleteSuccess();
         }else {
@@ -150,7 +151,7 @@ public class UserController extends BaseController {
      **/
     @PostMapping("/selectUserByField")
     public ResultData selectUserByField(User user, Integer pageNo, Integer pageSize){
-        PageInfo pageInfo = qyService.selectUserByField(user, pageNo, pageSize);
+        PageInfo pageInfo = iqyUserService.selectUserByField(user, pageNo, pageSize);
         //判断查询是否成功
         if (!"".equals(pageInfo) && null !=pageInfo){
             return super.selectSuccess(pageInfo);
@@ -169,7 +170,7 @@ public class UserController extends BaseController {
      **/
     @GetMapping("/selectUserBySsex")
     public ResultData selectUserBySsex(String ssex, Integer pageNo, Integer pageSize){
-        PageInfo pageInfo = qyService.selectUserBySsex(ssex, pageNo, pageSize);
+        PageInfo pageInfo = iqyUserService.selectUserBySsex(ssex, pageNo, pageSize);
         if (!"".equals(pageInfo) && null !=pageInfo){
             return super.selectSuccess(pageInfo);
         }
@@ -187,7 +188,7 @@ public class UserController extends BaseController {
      **/
     @GetMapping("/selectUserBySta")
     public ResultData selectUserBySta(String status,Integer pageNo,Integer pageSize){
-        PageInfo pageInfo = qyService.selectUserBySta(status, pageNo, pageSize);
+        PageInfo pageInfo = iqyUserService.selectUserBySta(status, pageNo, pageSize);
         if (!"".equals(pageInfo) && null !=pageInfo){
             return super.selectSuccess(pageInfo);
         }
@@ -205,7 +206,7 @@ public class UserController extends BaseController {
      **/
     @PostMapping("/resetUserPwd")
     public ResultData resetUserPwd(User user){
-        Integer integer = qyService.resetUserPwd(user);
+        Integer integer = iqyUserService.resetUserPwd(user);
         if (integer!=null){
             return super.updateSuccess();
         }

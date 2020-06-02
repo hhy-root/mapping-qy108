@@ -1,9 +1,10 @@
 package com.aaa.six.controller;
 
-import com.aaa.six.IQYService;
+import com.aaa.six.service.IQYService;
 import com.aaa.six.base.BaseController;
 import com.aaa.six.base.ResultData;
 import com.aaa.six.model.Technicist;
+import com.aaa.six.service.IQYTechService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,12 +17,13 @@ import java.util.List;
  * @author: lwq
  * @create: 2020-06-01 23:09
  * @description:
+ *      技术员信息管理
  **/
 @RestController
 public class TechnicistController extends BaseController {
 
     @Autowired
-    private IQYService qyService;
+    private IQYTechService iqyTechService;
 
     /**
      * @author lwq
@@ -34,7 +36,7 @@ public class TechnicistController extends BaseController {
      **/
     @PostMapping("/selectTechnicistInfo")
     public ResultData selectTechnicistInfo(@RequestParam("userId") Long userId) {
-        List<Technicist> technicists = qyService.selectTechnicistInfo(userId);
+        List<Technicist> technicists = iqyTechService.selectTechnicistInfo(userId);
         if (technicists.size()>0) {
             return selectSuccess(technicists);
         }
@@ -52,7 +54,7 @@ public class TechnicistController extends BaseController {
      **/
     @PostMapping("/addTechnicist")
     public ResultData addTechnicist(Technicist technicist){
-        Boolean aBoolean = qyService.addTechnicist(technicist);
+        Boolean aBoolean = iqyTechService.addTechnicist(technicist);
         if (aBoolean){
             return super.insertSuccess();
         }
@@ -69,7 +71,7 @@ public class TechnicistController extends BaseController {
      **/
     @PostMapping("/deleteTechnicist")
     public ResultData deleteTechnicist(Technicist technicist){
-        Boolean aBoolean = qyService.deleteTechnicist(technicist);
+        Boolean aBoolean = iqyTechService.deleteTechnicist(technicist);
         if (aBoolean){
             return super.deleteSuccess();
         }
@@ -87,7 +89,7 @@ public class TechnicistController extends BaseController {
      **/
     @PostMapping("/updateTechnicist")
     public ResultData updateTechnicist(Technicist technicist){
-        Boolean aBoolean = qyService.updateTechnicist(technicist);
+        Boolean aBoolean = iqyTechService.updateTechnicist(technicist);
         if (aBoolean){
             return super.updateSuccess();
 

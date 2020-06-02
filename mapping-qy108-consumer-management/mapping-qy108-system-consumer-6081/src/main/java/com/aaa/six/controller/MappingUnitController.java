@@ -3,7 +3,7 @@ package com.aaa.six.controller;
 import com.aaa.six.base.BaseController;
 import com.aaa.six.base.ResultData;
 import com.aaa.six.model.MappingUnit;
-import com.aaa.six.IQYService;
+import com.aaa.six.service.IQYMappingUnitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +21,7 @@ import java.util.List;
 public class MappingUnitController extends BaseController {
 
     @Autowired
-    private IQYService iqyService;
+    private IQYMappingUnitService iqyMappingUnitService;
     
     /**
      * @author lwq 
@@ -36,7 +36,7 @@ public class MappingUnitController extends BaseController {
     @PostMapping("/fuzzyUnitName")
     public ResultData<MappingUnit> getUnitName(String unitName, String ownedDistrict, String qualificationLevel) {
         // 调用 iqyService 中的 fuzzyUnitName 方法，得到查询结果
-        List<MappingUnit> mappingUnits = iqyService.fuzzyUnitName(unitName, ownedDistrict, qualificationLevel);
+        List<MappingUnit> mappingUnits = iqyMappingUnitService.fuzzyUnitName(unitName, ownedDistrict, qualificationLevel);
 
         // 判断 结果是否为空
         if (mappingUnits != null) {
@@ -62,7 +62,7 @@ public class MappingUnitController extends BaseController {
     @PostMapping("/selectUnitInfoById")
     public ResultData<MappingUnit> selectUnitInfoById(@RequestParam("id") Long id) {
         // 调用 iqyService 中的 selectUnitInfoById 方法，得到查询结果
-        MappingUnit mappingUnit1 = iqyService.selectUnitInfoById(id);
+        MappingUnit mappingUnit1 = iqyMappingUnitService.selectUnitInfoById(id);
 
         // 判断 结果是否为空
         if (null != mappingUnit1) {
