@@ -1,6 +1,6 @@
 package com.aaa.six.controller;
 
-import com.aaa.six.service.IQYService;
+import com.aaa.six.service.IQYFtpService;
 import com.aaa.six.base.BaseController;
 import com.aaa.six.base.ResultData;
 import io.swagger.annotations.ApiOperation;
@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 public class FtpController extends BaseController{
     @Autowired
-    private IQYService qyService;
+    private IQYFtpService qyService;
 
     @PostMapping("/upload")
     @ApiOperation(value = "实现文件上传", notes = "单文件上传接口")

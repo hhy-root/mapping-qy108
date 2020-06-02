@@ -1,6 +1,6 @@
 package com.aaa.six.controller;
 
-import com.aaa.six.service.IQYService;
+import com.aaa.six.service.IQYEquipmentService;
 import com.aaa.six.base.BaseController;
 import com.aaa.six.base.ResultData;
 import com.aaa.six.model.Equipment;
@@ -21,7 +21,7 @@ import java.util.List;
 @RestController
 public class EquipmentController extends BaseController {
     @Autowired
-    private IQYService qyService;
+    private IQYEquipmentService qyService;
 
     /**
      * @author lwq 

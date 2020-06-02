@@ -1,6 +1,6 @@
 package com.aaa.six.controller;
 
-import com.aaa.six.service.IQYService;
+import com.aaa.six.service.IQYMappingProjectService;
 import com.aaa.six.base.BaseController;
 import com.aaa.six.base.ResultData;
 import com.aaa.six.model.MappingProject;
@@ -25,7 +25,7 @@ import java.util.List;
 @Api(value = "项目信息", tags = "项目管理板块")
 public class MappingProjectController extends BaseController{
     @Autowired
-    private IQYService qyService;
+    private IQYMappingProjectService qyService;
 
 
     /**
