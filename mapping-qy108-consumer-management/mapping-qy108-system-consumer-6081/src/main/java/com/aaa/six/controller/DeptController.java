@@ -1,9 +1,9 @@
 package com.aaa.six.controller;
 
-import com.aaa.six.service.IQYService;
 import com.aaa.six.base.BaseController;
 import com.aaa.six.base.ResultData;
 import com.aaa.six.model.Dept;
+import com.aaa.six.service.IQYService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;

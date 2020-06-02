@@ -17,7 +17,13 @@ import java.util.List;
 import java.util.Map;
 
 import static com.aaa.six.status.ReturnStatus.CRUD_FALIED;
-
+/**
+ * @program: mapping-qy108
+ * @author: lwq
+ * @create: 2020-05-27 20:13
+ * @description:
+ *      菜单管理
+ **/
 @Service
 public class MenuService extends BaseService<Menu> {
 
@@ -25,11 +31,14 @@ public class MenuService extends BaseService<Menu> {
     private MenuMapper menuMapper;
 
     /**
-    * @Author: He create on 2020/5/21 16:27
-    * @param: [menu]
-    * @return: com.aaa.zk.model.Menu
-    * @Description: 查询一个具体的菜单或者按钮 进行操作
-    */
+     * @author lwq
+     * @description
+     *    查询一个具体的菜单或者按钮
+     * @param: [map]
+     * @date 2020/6/2
+     * @return java.util.List<com.aaa.six.model.Menu>
+     * @throws
+     **/
     public List<Menu> selectMenuByField(Map map){
         if (null != map){
             List<Menu> select = menuMapper.selectMenuByField(map);
@@ -42,11 +51,14 @@ public class MenuService extends BaseService<Menu> {
     }
 
     /**
-    * @Author: He create on 2020/5/26 14:33
-    * @param: [id]
-    * @return: com.aaa.zk.model.Menu
-    * @Description: 根据主键id查询菜单表数据
-    */
+     * @author lwq
+     * @description
+     *    根据主键id查询菜单表数据
+     * @param: [id]
+     * @date 2020/6/2
+     * @return com.aaa.six.model.Menu
+     * @throws
+     **/
     public Menu selectMenuByPrimaryKey(Object id){
         if (null != id){
             Menu menu = menuMapper.selectByPrimaryKey(id);
@@ -58,11 +70,14 @@ public class MenuService extends BaseService<Menu> {
         return null;
     }
     /**
-    * @Author: He create on 2020/5/21 17:53
-    * @param: [id]
-    * @return: java.util.List<com.aaa.zk.vo.MenuVo>
-    * @Description: 遍历查询所有菜单 并且把父级下的菜单放在下改菜单的下属目录中
-    */
+     * @author lwq
+     * @description
+     *    遍历查询所有菜单 并且把父级下的菜单放在下改菜单的下属目录中
+     * @param: [id]
+     * @date 2020/6/2
+     * @return java.util.List<com.aaa.six.vo.MenuVo>
+     * @throws
+     **/
     public List<MenuVo> selectMenuByParentId(Object id){
         //第一次查询传入的id为0 则为查询所有的菜单表
         List<MenuVo> menuVos = menuMapper.selectMenuByParentId(id);
@@ -81,11 +96,14 @@ public class MenuService extends BaseService<Menu> {
         return null;
     }
     /**
-    * @Author: He create on 2020/5/21 17:58
-    * @param: [menu]
-    * @return: java.lang.Integer
-    * @Description: 添加菜单
-    */
+     * @author lwq
+     * @description
+     *    添加菜单
+     * @param: [menu]
+     * @date 2020/6/2
+     * @return java.lang.Integer
+     * @throws
+     **/
     public Integer insertMenu(Menu menu){
         if ( null != menu){
             //获取当前时间 添加到数据库
@@ -98,11 +116,14 @@ public class MenuService extends BaseService<Menu> {
         return CRUD_FALIED;
     }
     /**
-    * @Author: He create on 2020/5/21 17:58
-    * @param: [id]
-    * @return: java.lang.Integer
-    * @Description: 根据主键删除菜单
-    */
+     * @author lwq
+     * @description
+     *    根据主键删除菜单
+     * @param: [menuId]
+     * @date 2020/6/2
+     * @return java.lang.Integer
+     * @throws
+     **/
     public Integer deleteMenuByPrimaryKey(Object menuId){
         if (null != menuId){
             int deleteResult = menuMapper.deleteByPrimaryKey(menuId);
@@ -113,11 +134,14 @@ public class MenuService extends BaseService<Menu> {
         return CRUD_FALIED;
     }
     /**
-     * @Author: He create on 2020/5/21 23:07
-     * @param: [map]
-     * @return: java.lang.Integer
-     * @Description: 通过主键id批量删除数据
-     */
+     * @author lwq
+     * @description
+     *    通过主键id批量删除数据
+     * @param: [list]
+     * @date 2020/6/2
+     * @return java.lang.Integer
+     * @throws
+     **/
     public Integer deleteMenuByPrimaryKeyList(List<Map> list){
         if (null != list && list.size() > 0){
             Integer deleteNum = 0;
@@ -134,11 +158,14 @@ public class MenuService extends BaseService<Menu> {
        return CRUD_FALIED;
     }
     /**
-    * @Author: He create on 2020/5/21 17:59
-    * @param: [menu]
-    * @return: java.lang.Integer
-    * @Description: 根据主键id 更新菜单信息
-    */
+     * @author lwq
+     * @description
+     *    根据主键id 更新菜单信息
+     * @param: [menu]
+     * @date 2020/6/2
+     * @return java.lang.Integer
+     * @throws
+     **/
     public Integer updateMenuByPrimaryKey(Menu menu){
         if (null != menu){
             //更新时传入当前时间 更新数据

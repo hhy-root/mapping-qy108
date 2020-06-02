@@ -1,10 +1,10 @@
 package com.aaa.six.controller;
 
-import com.aaa.six.service.IQYService;
 import com.aaa.six.annotation.LoginLogAnnotation;
 import com.aaa.six.base.BaseController;
 import com.aaa.six.base.ResultData;
 import com.aaa.six.model.User;
+import com.aaa.six.service.IQYService;
 import com.aaa.six.vo.TokenVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

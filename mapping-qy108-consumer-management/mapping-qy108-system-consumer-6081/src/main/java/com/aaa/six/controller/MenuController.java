@@ -1,10 +1,5 @@
 package com.aaa.six.controller;
-/*
- *@Company：
- *@Author：何康
- *@Date：2020/5/22 12:04
- *@Description:
- */
+
 
 import com.aaa.six.base.BaseController;
 import com.aaa.six.base.ResultData;
@@ -18,6 +13,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @program: mapping-qy108
+ * @author: lwq
+ * @create: 2020-05-27 20:13
+ * @description:
+ *      菜单管理
+ **/
 @RestController
 @Api(value = "菜单信息", tags = "菜单信息管理")
 public class MenuController extends BaseController {

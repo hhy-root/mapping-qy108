@@ -1,7 +1,6 @@
 package com.aaa.six.controller;
 
 import com.aaa.six.service.IQYEquipmentService;
-import com.aaa.six.service.IQYService;
 import com.aaa.six.base.BaseController;
 import com.aaa.six.base.ResultData;
 import com.aaa.six.model.Equipment;
@@ -22,7 +21,7 @@ import java.util.List;
 @RestController
 public class EquipmentController extends BaseController {
     @Autowired
-    private IQYEquipmentService iqyEquipmentService;
+    private IQYEquipmentService qyService;
 
     /**
      * @author lwq 
@@ -35,7 +34,7 @@ public class EquipmentController extends BaseController {
      **/
     @PostMapping("/selectEquipmentInfo")
     public ResultData selectEquipmentInfo(@RequestParam("userId") Long userId) {
-        List<Equipment> equipmentList = iqyEquipmentService.selectEquipmentInfo(userId);
+        List<Equipment> equipmentList = qyService.selectEquipmentInfo(userId);
         if (equipmentList.size()>0) {
             return selectSuccess(equipmentList);
         }
@@ -53,7 +52,7 @@ public class EquipmentController extends BaseController {
      **/
     @PostMapping("/addEquipment")
     public ResultData addEquipment(Equipment equipment){
-        Boolean aBoolean = iqyEquipmentService.addEquipment(equipment);
+        Boolean aBoolean = qyService.addEquipment(equipment);
         if (aBoolean){
             return super.insertSuccess();
         }
@@ -70,7 +69,7 @@ public class EquipmentController extends BaseController {
      **/
     @PostMapping("/deleteEquipment")
     public ResultData deleteEquipment(Equipment equipment){
-        Boolean aBoolean = iqyEquipmentService.deleteEquipment(equipment);
+        Boolean aBoolean = qyService.deleteEquipment(equipment);
         if (aBoolean){
             return super.deleteSuccess();
         }
@@ -88,7 +87,7 @@ public class EquipmentController extends BaseController {
      **/
     @PostMapping("/updateEquipment")
     public ResultData updateEquipment(Equipment equipment){
-        Boolean aBoolean = iqyEquipmentService.updateEquipment(equipment);
+        Boolean aBoolean = qyService.updateEquipment(equipment);
         if (aBoolean){
             return super.updateSuccess();
 

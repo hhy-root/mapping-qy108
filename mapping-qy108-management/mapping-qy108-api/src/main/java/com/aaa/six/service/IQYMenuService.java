@@ -12,70 +12,97 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-
+/**
+ * @program: mapping-qy108
+ * @author: lwq
+ * @create: 2020-05-27 20:13
+ * @description:
+ *      菜单管理
+ **/
 @FeignClient(value = "menu-interface")
 public interface IQYMenuService {
 
     /**
-    * @Author: He create on 2020/5/22 12:06
-    * @param: [menu]
-    * @return: com.aaa.zk.base.ResultData
-    * @Description: 条件查询菜单
-    */
+     * @author lwq
+     * @description
+     *    条件查询菜单
+     * @param: [map]
+     * @date 2020/6/2
+     * @return com.aaa.six.base.ResultData
+     * @throws
+     **/
     @PostMapping("selectMenuByField")
     ResultData selectMenuByField(@RequestBody Map map);
 
     /**
-    * @Author: He create on 2020/5/26 14:55
-    * @param: [id]
-    * @return: com.aaa.zk.base.ResultData
-    * @Description: 根据主键id查询菜单表数据
-    */
+     * @author lwq
+     * @description
+     *    根据主键id查询菜单表数据
+     * @param: [id]
+     * @date 2020/6/2
+     * @return com.aaa.six.base.ResultData
+     * @throws
+     **/
     @GetMapping("selectMenuByPrimaryKey/{id}")
-    public ResultData selectMenuByPrimaryKey(@PathVariable("id") Object id);
+    ResultData selectMenuByPrimaryKey(@PathVariable("id") Object id);
 
     /**
-    * @Author: He create on 2020/5/22 12:06
-    * @param: [id]
-    * @return: com.aaa.zk.base.ResultData
-    * @Description: 查询菜单表所有信息 并且把子菜单放在父级菜单下（传入的id应为最大父级id 0）
-    */
+     * @author lwq
+     * @description
+     *    查询菜单表所有信息 并且把子菜单放在父级菜单下（传入的id应为最大父级id 0）
+     * @param: [id]
+     * @date 2020/6/2
+     * @return com.aaa.six.base.ResultData
+     * @throws
+     **/
     @GetMapping("selectMenuByParentId/{id}")
-    public ResultData selectMenuByParentId(@PathVariable("id") Object id);
+    ResultData selectMenuByParentId(@PathVariable("id") Object id);
 
     /**
-    * @Author: He create on 2020/5/22 12:07
-    * @param: [menu]
-    * @return: com.aaa.zk.base.ResultData
-    * @Description: 添加新菜单
-    */
+     * @author lwq
+     * @description
+     *    添加新菜单
+     * @param: [menu]
+     * @date 2020/6/2
+     * @return com.aaa.six.base.ResultData
+     * @throws
+     **/
     @PutMapping("insertMenu")
     ResultData insertMenu(@RequestBody Menu menu);
 
     /**
-    * @Author: He create on 2020/5/22 12:07
-    * @param: [menu]
-    * @return: com.aaa.zk.base.ResultData
-    * @Description: 根据主键id修改菜单信息
-    */
+     * @author lwq
+     * @description
+     *    根据主键id修改菜单信息
+     * @param: [menu]
+     * @date 2020/6/2
+     * @return com.aaa.six.base.ResultData
+     * @throws
+     **/
     @PostMapping("updateMenuByPrimaryKey")
     ResultData updateMenuByPrimaryKey(@RequestBody Menu menu);
 
     /**
-    * @Author: He create on 2020/5/22 12:07
-    * @param: [menu]
-    * @return: com.aaa.zk.base.ResultData
-    * @Description: 根据主键id删除一条数据
-    */
+     * @author lwq
+     * @description
+     *    根据主键id删除一条数据
+     * @param: [id]
+     * @date 2020/6/2
+     * @return com.aaa.six.base.ResultData
+     * @throws
+     **/
     @DeleteMapping("deleteMenuByPrimaryKey")
     ResultData deleteMenuByPrimaryKey(@RequestBody Object id);
 
     /**
-    * @Author: He create on 2020/5/22 12:08
-    * @param: [list]
-    * @return: com.aaa.zk.base.ResultData
-    * @Description: 根据主键id批量删除
-    */
+     * @author lwq
+     * @description
+     *    根据主键id批量删除
+     * @param: [list]
+     * @date 2020/6/2
+     * @return com.aaa.six.base.ResultData
+     * @throws
+     **/
     @DeleteMapping("deleteMenuByPrimaryKeyList")
     ResultData deleteMenuByPrimaryKeyList(@RequestBody List<Map> list);
 }
