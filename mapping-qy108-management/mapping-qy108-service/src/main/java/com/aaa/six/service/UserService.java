@@ -21,6 +21,7 @@ import static com.aaa.six.staticstatus.UserPassword.USER_PASSWORD;
  * @author: lwq
  * @create: 2020-05-20 17:05
  * @description:
+ *      用户管理
  **/
 @Service
 public class UserService extends BaseService<User> {

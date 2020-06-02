@@ -17,6 +17,7 @@ import java.util.List;
  * @author: lwq
  * @create: 2020-05-26 16:35
  * @description:
+ *      字典管理
  **/
 @RestController
 public class DictController extends BaseController {

@@ -16,6 +16,7 @@ import static com.aaa.six.staticstatus.RedisProperties.*;
  * @author: lwq
  * @create: 2020-05-27 20:13
  * @description:
+ *      用户登录
  **/
 @Service
 public class LoginService extends BaseService<User> {
