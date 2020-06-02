@@ -5,13 +5,11 @@ import com.aaa.six.model.LoginLog;
 import org.springframework.stereotype.Service;
 
 /**
- * @Company AAA软件教育
- * @Title mapping-qy108
- * @Author hhy
- * @Version 0.1.0
- * @Date Create in 2020/5/28 19:09
- * @Description
- */
+ * @program: mapping-qy108
+ * @author: lwq
+ * @create: 2020-05-28 10:45
+ * @description:
+ **/
 @Service
 public class LoginLogService extends BaseService<LoginLog> {
 }

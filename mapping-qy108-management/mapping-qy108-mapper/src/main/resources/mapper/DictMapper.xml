@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.aaa.six.mapper.DictMapper" >
+  <resultMap id="BaseResultMap" type="com.aaa.six.model.Dict" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="KEYY" property="keyy" jdbcType="BIGINT" />
+    <result column="VALUEE" property="valuee" jdbcType="VARCHAR" />
+    <result column="FIELD_NAME" property="fieldName" jdbcType="VARCHAR" />
+    <result column="TABLE_NAME" property="tableName" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="selectDictByField" resultMap="BaseResultMap" parameterType="com.aaa.six.model.Dict">
+    SELECT ID,KEYY,VALUEE,FIELD_NAME,TABLE_NAME FROM t_dict
+    <where>
+      1=1
+      <if test="keyy != null and keyy != ''">
+        AND KEYY=#{keyy, jdbcType=VARCHAR}
+      </if>
+      <if test="valuee != null and valuee != ''">
+        AND VALUEE=#{valuee, jdbcType=BIGINT}
+      </if>
+      <if test="fieldName != null and fieldName != ''">
+        AND FIELD_NAME=#{fieldName, jdbcType=BIGINT}
+      </if>
+      <if test="tableName != null and tableName != ''">
+        AND TABLE_NAME=#{tableName, jdbcType=BIGINT}
+      </if>
+    </where>
+  </select>
+</mapper>

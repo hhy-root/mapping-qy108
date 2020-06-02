@@ -1,22 +1,23 @@
-package com.aaa.six.service;
+package com.aaa.six.service;/*
+ *@Company：
+ *@Author：何康
+ *@Date：2020/5/21 16:21
+ *@Description:
+ */
 
 import com.aaa.six.base.BaseService;
 import com.aaa.six.mapper.MenuMapper;
 import com.aaa.six.model.Menu;
+import com.aaa.six.utils.DateUtils;
+import com.aaa.six.vo.MenuVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-/**
- * @Company AAA软件教育
- * @Title mapping-qy108
- * @Author hhy
- * @Version 0.1.0
- * @Date Create in 2020/5/21 22:20
- * @Description
- */
+import static com.aaa.six.status.ReturnStatus.CRUD_FALIED;
+
 @Service
 public class MenuService extends BaseService<Menu> {
 
@@ -24,57 +25,129 @@ public class MenuService extends BaseService<Menu> {
     private MenuMapper menuMapper;
 
     /**
-     * @author hhy
-     * @description
-     *    查询所有权限
-     * @param: []
-     * @date 2020/5/22 10:27
-     * @return java.util.List<com.aaa.six.model.Menu>
-     * @throws 
-     */
-    public List<Menu> getAllMenu(){
-
-        // 查询父权限
-        List<Menu> menus1 = menuMapper.selectMenu(0L);
-        //遍历父权限
-        for (Menu menus:menus1){
-            // 这个list的作用是，将二级节点存储到父菜单中
-            List list = new ArrayList();
-            //获取父权限的菜单id
-            Long menuId = menus.getId();
-            //遍历二级权限
-            // 查询当前父权限拥有的二级权限
-            List<Menu> menus2 = menuMapper.selectMenu(menuId);
-            for (Menu menu:menus2){
-                //获取二级权限菜单id
-                Long menuId1 = menu.getId();
-                //获取二级权限父权限id
-                Long parentId = menu.getParentId();
-                //判断菜单id和父权限id是否相同，相同则这个二级权限在这个父权限下
-                if (menuId.equals(parentId)) {
-                    //将二级权限添加到父菜单中
-                    list.add(menu);
-                    // 这个list的作用是，将子节点存储到二级菜单中
-                    ArrayList list1 = new ArrayList();
-                    //查询当前角色拥有的三级权限（子权限）
-                    List<Menu> menus3 = menuMapper.selectMenu(menuId1);
-                    //遍历子权限
-                    for (Menu menu1 : menus3){
-                        //获取子权限的父权限id
-                        Long parentId1 = menu1.getParentId();
-                        //判断菜单id和父权限id是否相同，相同则这个子权限在这个二级权限下
-                        if(menuId1.equals(parentId1)){
-                            list1.add(menu1);
-                        }
-                    }
-                    menu.setSon(list1);
-                }
+    * @Author: He create on 2020/5/21 16:27
+    * @param: [menu]
+    * @return: com.aaa.zk.model.Menu
+    * @Description: 查询一个具体的菜单或者按钮 进行操作
+    */
+    public List<Menu> selectMenuByField(Map map){
+        if (null != map){
+            List<Menu> select = menuMapper.selectMenuByField(map);
+            if (null != select && select.size() > 0){
+                return select;
             }
-            menus.setSon(list);
+            return null;
         }
-
-        return menus1;
+        return null;
     }
 
-
+    /**
+    * @Author: He create on 2020/5/26 14:33
+    * @param: [id]
+    * @return: com.aaa.zk.model.Menu
+    * @Description: 根据主键id查询菜单表数据
+    */
+    public Menu selectMenuByPrimaryKey(Object id){
+        if (null != id){
+            Menu menu = menuMapper.selectByPrimaryKey(id);
+            if (null != menu){
+                return menu;
+            }
+            return null;
+        }
+        return null;
+    }
+    /**
+    * @Author: He create on 2020/5/21 17:53
+    * @param: [id]
+    * @return: java.util.List<com.aaa.zk.vo.MenuVo>
+    * @Description: 遍历查询所有菜单 并且把父级下的菜单放在下改菜单的下属目录中
+    */
+    public List<MenuVo> selectMenuByParentId(Object id){
+        //第一次查询传入的id为0 则为查询所有的菜单表
+        List<MenuVo> menuVos = menuMapper.selectMenuByParentId(id);
+        if (null != menuVos && menuVos.size() > 0){
+            //循环遍历第一次查询的集合
+            for (MenuVo menuVO : menuVos) {
+                //以本身的id为参数  进行查询本身的子菜单
+                Object id1 = menuVO.getId();
+                //循环查询 直到本身菜单不在存在子菜单
+                List<MenuVo> menuVos1 = this.selectMenuByParentId(id1);
+                //添加到父级菜单的集合中 进行数据的返回
+                menuVO.setChildrenList(menuVos1);
+            }
+            return menuVos;
+        }
+        return null;
+    }
+    /**
+    * @Author: He create on 2020/5/21 17:58
+    * @param: [menu]
+    * @return: java.lang.Integer
+    * @Description: 添加菜单
+    */
+    public Integer insertMenu(Menu menu){
+        if ( null != menu){
+            //获取当前时间 添加到数据库
+            menu.setCreateTime(DateUtils.getCurrentDate());
+            int insertResult = menuMapper.insert(menu);
+            if (insertResult > 0){
+                return insertResult;
+            }
+        }
+        return CRUD_FALIED;
+    }
+    /**
+    * @Author: He create on 2020/5/21 17:58
+    * @param: [id]
+    * @return: java.lang.Integer
+    * @Description: 根据主键删除菜单
+    */
+    public Integer deleteMenuByPrimaryKey(Object menuId){
+        if (null != menuId){
+            int deleteResult = menuMapper.deleteByPrimaryKey(menuId);
+            if (deleteResult > 0){
+                return deleteResult;
+            }
+        }
+        return CRUD_FALIED;
+    }
+    /**
+     * @Author: He create on 2020/5/21 23:07
+     * @param: [map]
+     * @return: java.lang.Integer
+     * @Description: 通过主键id批量删除数据
+     */
+    public Integer deleteMenuByPrimaryKeyList(List<Map> list){
+        if (null != list && list.size() > 0){
+            Integer deleteNum = 0;
+            //循环遍历list中的map 取出其中的id进行删除操作
+            for (Map map : list){
+                Object id = map.get("id");
+                int deleteResult = menuMapper.deleteByPrimaryKey(id);
+                if (deleteResult > 0){
+                    deleteNum += 1;
+                }
+            }
+            return deleteNum;
+        }
+       return CRUD_FALIED;
+    }
+    /**
+    * @Author: He create on 2020/5/21 17:59
+    * @param: [menu]
+    * @return: java.lang.Integer
+    * @Description: 根据主键id 更新菜单信息
+    */
+    public Integer updateMenuByPrimaryKey(Menu menu){
+        if (null != menu){
+            //更新时传入当前时间 更新数据
+            menu.setModifyTime(DateUtils.getCurrentDate());
+            int updateResult = menuMapper.updateByPrimaryKey(menu);
+            if (updateResult  > 0){
+                return updateResult;
+            }
+        }
+        return CRUD_FALIED;
+    }
 }

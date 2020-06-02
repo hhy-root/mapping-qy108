@@ -1,14 +1,16 @@
-package com.aaa.six;
+package com.aaa.six.service;
 
-import com.aaa.six.model.Dept;
-import com.aaa.six.model.MappingProject;
-import com.aaa.six.model.User;
+import com.aaa.six.base.ResultData;
+import com.aaa.six.model.*;
 import com.aaa.six.vo.TokenVo;
 import com.github.pagehelper.PageInfo;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Company AAA软件教育
@@ -47,154 +49,177 @@ public interface IQYService {
     TokenVo doLogin(@RequestBody User user);
 
     /**
-     * @Author: ly
-     * @description:
-     *
-     *      查询所有的部门
-     * @date: 2020/5/22
      * @param pid
      * @param pageNo
      * @param pageSize
+     * @Author: ly
+     * @description: 查询所有的部门
+     * @date: 2020/5/22
      * @return: com.github.pagehelper.PageInfo
-     *
      */
     @PostMapping("/getAllDept")
     PageInfo getAllDept(@RequestParam("pid") Integer pid, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
 
     /**
-     * @Author: ly
-     * @description:
-     *
-     *      根据主键查找部门
-     * @date: 2020/5/22
      * @param id
+     * @Author: ly
+     * @description: 根据主键查找部门
+     * @date: 2020/5/22
      * @return: com.aaa.six.model.Dept
-     *
      */
     @GetMapping("/getDeptById")
-    Dept getDeptById(@RequestParam("id")Integer id);
+    Dept getDeptById(@RequestParam("id") Integer id);
 
     /**
-     * @Author: ly
-     * @description:
-     *
-     *      按照调价查询部门
-     * @date: 2020/5/22
      * @param dept
+     * @Author: ly
+     * @description: 按照调价查询部门
+     * @date: 2020/5/22
      * @return: java.util.List<com.aaa.six.model.Dept>
-     *
      */
     @PostMapping("/getDeptByFileds")
     List<Dept> getDeptByFileds(@RequestBody Dept dept);
 
     /**
-     * @Author: ly
-     * @description:
-     *
-     *      更新部门
-     * @date: 2020/5/22
      * @param dept
+     * @Author: ly
+     * @description: 更新部门
+     * @date: 2020/5/22
      * @return: java.lang.Integer
-     *
      */
     @PostMapping("/updateDept")
     Integer updateDept(@RequestBody Dept dept);
 
     /**
-     * @Author: ly
-     * @description:
-     *
-     *      按照主键批量删除
-     * @date: 2020/5/22
      * @param ids
+     * @Author: ly
+     * @description: 按照主键批量删除
+     * @date: 2020/5/22
      * @return: java.lang.Integer
-     *
      */
     @PostMapping("/delByIds")
     Integer delByIds(@RequestBody List<Object> ids);
 
     /**
-     * @Author: ly
-     * @description:
-     *
-     *      增加部门
-     * @date: 2020/5/22
      * @param dept
+     * @Author: ly
+     * @description: 增加部门
+     * @date: 2020/5/22
      * @return: java.lang.Integer
-     *
      */
     @PostMapping("/addDept")
     Integer addDept(@RequestBody Dept dept);
 
 
     /**
-     *@Description: TODO
+     * @Description: TODO
      * 项目管理 新增方法 单个新增
-     *@Param :  [mappingProject]
-     *@MethodName: add
-     *@Author: lifuju
-     *@Date: 2020/5/24 8:51
-     *@Return: java.lang.Integer
+     * @Param :  [mappingProject]
+     * @MethodName: add
+     * @Author: lifuju
+     * @Date: 2020/5/24 8:51
+     * @Return: java.lang.Integer
      */
     @PostMapping("/addMappingProject")
     Integer add(@RequestBody MappingProject mappingProject);
+
     /**
-     *@Description: TODO
+     * @Description: TODO
      * 项目管理 删除方法  单个删除
-     *@Param :  [id]
-     *@MethodName: delMappingProject
-     *@Author: lifuju
-     *@Date: 2020/5/24 8:52
-     *@Return: java.lang.Integer
+     * @Param :  [id]
+     * @MethodName: delMappingProject
+     * @Author: lifuju
+     * @Date: 2020/5/24 8:52
+     * @Return: java.lang.Integer
      */
     @GetMapping("/delMappingProject/{id}")
     Integer delMappingProject(@PathVariable("id") Long id);
 
     /**
-     *@Description: TODO
+     * @Description: TODO
      * 项目管理 删除方法 批量删除
-     *@Param :  [ids]
-     *@MethodName: delBatch
-     *@Author: lifuju
-     *@Date: 2020/5/24 8:52
-     *@Return: java.lang.Integer
+     * @Param :  [ids]
+     * @MethodName: delBatch
+     * @Author: lifuju
+     * @Date: 2020/5/24 8:52
+     * @Return: java.lang.Integer
      */
     @PostMapping("/deleteBatchMappingProject")
     Integer delBatch(@RequestBody List<Object> ids);
 
     /**
-     *@Description: TODO
+     * @Description: TODO
      * 项目管理 更新方法 单个更新
-     *@Param :  [id]
-     *@MethodName: selectOne
-     *@Author: lifuju
-     *@Date: 2020/5/24 8:52
-     *@Return: com.aaa.six.model.MappingProject
+     * @Param :  [id]
+     * @MethodName: selectOne
+     * @Author: lifuju
+     * @Date: 2020/5/24 8:52
+     * @Return: com.aaa.six.model.MappingProject
      */
     @GetMapping("lectOne")
-    MappingProject selectOne(@RequestParam("id")Long id);
+    MappingProject selectOne(@RequestParam("id") Long id);
 
     /**
-     *@Description: TODO
+     * @Description: TODO
      * 项目管理 更新方法 单个更新
-     *@Param :  [mappingProject]
-     *@MethodName: update
-     *@Author: lifuju
-     *@Date: 2020/5/24 8:53
-     *@Return: java.lang.Integer
+     * @Param :  [mappingProject]
+     * @MethodName: update
+     * @Author: lifuju
+     * @Date: 2020/5/24 8:53
+     * @Return: java.lang.Integer
      */
     @PostMapping("/updateMappingProject")
     Integer update(@RequestBody MappingProject mappingProject);
 
     /**
-     *@Description: TODO
+     * @Description: TODO
      * 项目管理 查询方法 分页查询
-     *@Param :  [pageNo, pageSize]
-     *@MethodName: queryListByPage
-     *@Author: lifuju
-     *@Date: 2020/5/24 8:53
-     *@Return: com.github.pagehelper.PageInfo
+     * @Param :  [pageNo, pageSize]
+     * @MethodName: queryListByPage
+     * @Author: lifuju
+     * @Date: 2020/5/24 8:53
+     * @Return: com.github.pagehelper.PageInfo
      */
     @PostMapping("/mappingProjectByPage")
     PageInfo queryListByPage(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
+    /**
+     *@Description: TODO
+     * 文件上传
+     *@Param :  [file, rfBizType, refBizId, memo]
+     *@MethodName: uploadFile
+     *@Author: lifuju
+     *@Date: 2020/6/2 16:19
+     *@Return: java.lang.Boolean
+     */
+
+    @PostMapping(value = "/upload",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    Boolean uploadFile(@RequestBody MultipartFile file, @RequestParam("rfBizType") String rfBizType, @RequestParam("refBizId") Long refBizId, @RequestParam("memo") String memo);
+
+    /**
+     *@Description: TODO
+     * 文件下载
+     *@Param :  [localPath, id]
+     *@MethodName: downloadFile
+     *@Author: lifuju
+     *@Date: 2020/5/30 10:37
+     *@Return: java.lang.Boolean
+     */
+    @PostMapping("/download")
+    Boolean download(@RequestParam("localPath") String localPath, @RequestParam("id") Long id);
+
+
+
+    /**
+     * @return com.aaa.six.base.ResultData
+     * @throws
+     * @author lwq
+     * @description 添加登录日志信息
+     * @param: [map]
+     * @date 2020/5/28
+     **/
+    @PostMapping("/addLoginLog")
+    ResultData addLoginLog(@RequestBody Map map);
+
 }

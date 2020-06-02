@@ -1,28 +1,21 @@
 package com.aaa.six.model;
 
+import com.aaa.six.base.BaseModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Table;
 
+@Table(name = "t_menu")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-@Table(name = "t_menu")
-public class Menu implements Serializable {
-    /**
-     * 菜单/按钮ID
-     */
-    @Id
-    @Column(name = "MENU_ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Menu extends BaseModel {
+
 
     /**
      * 上级菜单ID
@@ -72,17 +65,4 @@ public class Menu implements Serializable {
     @Column(name = "ORDER_NUM")
     private Double orderNum;
 
-    /**
-     * 创建时间
-     */
-    @Column(name = "CREATE_TIME")
-    private String createTime;
-
-    /**
-     * 修改时间
-     */
-    @Column(name = "MODIFY_TIME")
-    private String modifyTime;
-
-    private List son;
 }

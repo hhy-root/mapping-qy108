@@ -4,13 +4,10 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @Company AAA软件教育
- * @Title mapping-qy108
- * @Author hhy
- * @Version 0.1.0
- * @Date Create in 2020/5/28 18:39
+ * @Author Seven Lee
+ * @Date Create in 2020/5/27 15:38
  * @Description
- *     ip工具类
- */
+ **/
 public class IPUtils {
 
     private IPUtils() {
@@ -20,14 +17,14 @@ public class IPUtils {
     private static final String UNKNOWN = "unknown";
 
     /**
-     * @author hhy
+     * @author Seven Lee
      * @description
-     *    获取用户的ip地址
-     * @param: [request]
-     * @date 2020/5/28 18:42
+     *      获取到用户的ip地址
+     * @param [request]
+     * @date 2020/5/27
      * @return java.lang.String
-     * @throws 
-     */
+     * @throws
+    **/
     public static String getIpAddr(HttpServletRequest request) {
 
         // 其实用户的ip地址你们都可以获取到:x-forwarded-for就是ip地址

@@ -2,12 +2,10 @@ package com.aaa.six.staticstatus;
 
 /**
  * @Company AAA软件教育
- * @Title mapping-qy108
- * @Author hhy
- * @Version 0.1.0
- * @Date Create in 2020/5/28 18:59
+ * @Author Seven Lee
+ * @Date Create in 2020/5/27 15:35
  * @Description
- */
+ **/
 public class TimeProperties {
 
     /**

@@ -13,8 +13,8 @@
     <result column="ext_name" property="extName" jdbcType="VARCHAR" />
     <result column="ref_biz_type" property="refBizType" jdbcType="VARCHAR" />
     <result column="ref_biz_id" property="refBizId" jdbcType="BIGINT" />
-    <result column="create_time" property="createTime" jdbcType="DATE" />
-    <result column="modify_time" property="modifyTime" jdbcType="DATE" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="modify_time" property="modifyTime" jdbcType="VARCHAR" />
     <result column="memo" property="memo" jdbcType="VARCHAR" />
   </resultMap>
 </mapper>

@@ -1,6 +1,6 @@
 package com.aaa.six.controller;
 
-import com.aaa.six.IQYService;
+import com.aaa.six.service.IQYService;
 import com.aaa.six.base.BaseController;
 import com.aaa.six.base.ResultData;
 import com.aaa.six.model.MappingProject;
@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @ProjectName: mapping-qy108

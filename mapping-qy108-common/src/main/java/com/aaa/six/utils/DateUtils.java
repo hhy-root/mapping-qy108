@@ -1,18 +1,18 @@
 package com.aaa.six.utils;
 
+import io.micrometer.core.instrument.util.StringUtils;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 /**
  * @Company AAA软件教育
- * @Title mapping-qy108
- * @Author hhy
- * @Version 0.1.0
- * @Date Create in 2020/5/28 18:27
+ * @Author Seven Lee
+ * @Date Create in 2020/5/27 15:01
  * @Description
- *     日期工具类
- */
+ *      日期处理工具类
+ **/
 public class DateUtils {
 
     private DateUtils() {
@@ -24,15 +24,16 @@ public class DateUtils {
      */
     public static final String DATE_TYPE = "yyyy-MM-dd";
 
+
     /**
-     * @author hhy
+     * @author Seven Lee
      * @description
-     *    按照DATE_TYPE格式来进行转换
-     * @param: [date]
-     * @date 2020/5/28 18:28
+     *      按照DATE_TYPE格式来进行转换
+     * @param []
+     * @date 2020/5/27
      * @return java.lang.String
-     * @throws 
-     */
+     * @throws
+    **/
     public static final String formatDate(Object date) {
         if(null == date) {
             return null;
@@ -42,14 +43,14 @@ public class DateUtils {
     }
 
     /**
-     * @author hhy
+     * @author Seven Lee
      * @description
-     *    按照指定日期格式进行转换
-     * @param: [date, formatType]
-     * @date 2020/5/28 18:29
+     *      按照指定格式日期来进行转换
+     * @param []
+     * @date 2020/5/27
      * @return java.lang.String
-     * @throws 
-     */
+     * @throws
+    **/
     public static final String formatDate(Object date, String formatType) {
         if(null == date) {
             return null;
@@ -66,14 +67,14 @@ public class DateUtils {
     }
 
     /**
-     * @author hhy
+     * @author Seven Lee
      * @description
-     *    将时间转化成字符串
-     * @param: [millisecond]
-     * @date 2020/5/28 18:30
+     *      将时间转换为字符串
+     * @param [millisecond]
+     * @date 2020/5/27
      * @return java.lang.String
-     * @throws 
-     */
+     * @throws
+    **/
     public static String formatDateAgo(long millisecond) {
         StringBuilder stringBuilder = new StringBuilder();
         if(1000 > millisecond) {
@@ -111,31 +112,29 @@ public class DateUtils {
     }
 
     /**
-     * @author hhy
+     * @author Seven Lee
      * @description
-     *    获取系统当前时间
-     * @param: []
-     * @date 2020/5/28 18:37
+     *      获取系统当前时间
+     * @param []
+     * @date 2020/5/27
      * @return java.lang.String
      * @throws
-     */
+    **/
     public static final String getCurrentDate() {
         return formatDate(new Date());
     }
 
     /**
-     * @author hhy
+     * @author Seven Lee
      * @description
-     *    获取当前年份
-     * @param: []
-     * @date 2020/5/28 18:37
+     *      获取当年年度
+     * @param []
+     * @date 2020/5/27
      * @return java.lang.Integer
-     * @throws 
-     */
+     * @throws
+    **/
     public static Integer getCurrentYear() {
         return Calendar.getInstance().get(Calendar.YEAR);
     }
-
-
 
 }

@@ -12,28 +12,26 @@ import org.springframework.stereotype.Service;
 import static com.aaa.six.staticstatus.RedisProperties.*;
 
 /**
- * @Company AAA软件教育
- * @Title mapping-qy108
- * @Author hhy
- * @Version 0.1.0
- * @Date Create in 2020/5/16 9:18
- * @Description
- */
+ * @program: mapping-qy108
+ * @author: lwq
+ * @create: 2020-05-27 20:13
+ * @description:
+ *      用户登录
+ **/
 @Service
 public class LoginService extends BaseService<User> {
-
     @Autowired
     private UserMapper userMapper;
 
-   /**
-    * @author hhy
-    * @description
-    *    执行登录操作
-    * @param: [user, redisService]
-    * @date 2020/5/16 9:19
-    * @return TokenVo
-    * @throws
-    */
+    /**
+     * @author hhy
+     * @description
+     *    执行登录操作
+     * @param: [user, redisService]
+     * @date 2020/5/16 9:19
+     * @return TokenVo
+     * @throws
+     */
     public TokenVo doLogin(User user, RedisService redisService) {
         TokenVo tokenVo = new TokenVo();
         tokenVo.setIfSuccess(false);
