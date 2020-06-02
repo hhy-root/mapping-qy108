@@ -17,7 +17,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-
+/**
+ * @program: mapping-qy108
+ * @author: lwq
+ * @create: 2020-05-27 20:13
+ * @description:
+ *      菜单管理
+ **/
 @RestController
 public class MenuController extends BaseController {
 
@@ -25,11 +31,14 @@ public class MenuController extends BaseController {
     private MenuService menuService;
 
     /**
-    * @Author: He create on 2020/5/21 17:02
-    * @param: [menu]
-    * @return: com.aaa.zk.base.ResultData
-    * @Description: 查询一个菜单的具体信息
-    */
+     * @author lwq 
+     * @description
+     *    查询一个菜单的具体信息
+     * @param: [map]
+     * @date 2020/6/2
+     * @return com.aaa.six.base.ResultData
+     * @throws 
+     **/
     @PostMapping("selectMenuByField")
     public ResultData selectMenuByField(@RequestBody Map map){
         List<Menu> menus = menuService.selectMenuByField(map);
@@ -40,11 +49,14 @@ public class MenuController extends BaseController {
     }
 
     /**
-    * @Author: He create on 2020/5/26 14:45
-    * @param: [id]
-    * @return: com.aaa.zk.base.ResultData
-    * @Description: 根据主键id查询菜单信息
-    */
+     * @author lwq 
+     * @description
+     *    根据主键id查询菜单信息
+     * @param: [id]
+     * @date 2020/6/2
+     * @return com.aaa.six.base.ResultData
+     * @throws 
+     **/
     @GetMapping("selectMenuByPrimaryKey/{id}")
     public ResultData selectMenuByPrimaryKey(@PathVariable("id") Object id){
         Menu menu = menuService.selectMenuByPrimaryKey(id);
@@ -54,11 +66,14 @@ public class MenuController extends BaseController {
         return super.selectFailed();
     }
     /**
-    * @Author: He create on 2020/5/21 17:01
-    * @param: [id]
-    * @return: com.aaa.zk.base.ResultData
-    * @Description: 遍历查询所有的权限菜单
-    */
+     * @author lwq 
+     * @description
+     *    遍历查询所有的权限菜单
+     * @param: [id]
+     * @date 2020/6/2
+     * @return com.aaa.six.base.ResultData
+     * @throws 
+     **/
     @GetMapping("selectMenuByParentId/{id}")
     public ResultData selectMenuByParentId(@PathVariable("id") Object id){
         List<MenuVo> menuVos = menuService.selectMenuByParentId(id);
@@ -68,11 +83,14 @@ public class MenuController extends BaseController {
         return super.selectFailed();
     }
     /**
-    * @Author: He create on 2020/5/21 18:15
-    * @param: [menu]
-    * @return: com.aaa.zk.base.ResultData
-    * @Description: 添加菜单
-    */
+     * @author lwq 
+     * @description
+     *    添加菜单
+     * @param: [menu]
+     * @date 2020/6/2
+     * @return com.aaa.six.base.ResultData
+     * @throws 
+     **/
     @PutMapping("insertMenu")
     public ResultData insertMenu(@RequestBody Menu menu){
         Integer insertResult = menuService.insertMenu(menu);
@@ -82,11 +100,14 @@ public class MenuController extends BaseController {
         return super.insertFailed();
     }
     /**
-    * @Author: He create on 2020/5/21 18:15
-    * @param: [menu]
-    * @return: com.aaa.zk.base.ResultData
-    * @Description: 根据主键id 进行菜单数据的更新
-    */
+     * @author lwq 
+     * @description
+     *    根据主键id 进行菜单数据的更新
+     * @param: [menu]
+     * @date 2020/6/2
+     * @return com.aaa.six.base.ResultData
+     * @throws 
+     **/
     @PostMapping("updateMenuByPrimaryKey")
     public ResultData updateByPrimaryKey(@RequestBody Menu menu){
         Integer updateResult = menuService.updateMenuByPrimaryKey(menu);
@@ -96,11 +117,14 @@ public class MenuController extends BaseController {
         return super.updateFailed();
     }
     /**
-    * @Author: He create on 2020/5/21 18:15
-    * @param: [id]
-    * @return: com.aaa.zk.base.ResultData
-    * @Description: 根据主键id删除菜单数据
-    */
+     * @author lwq 
+     * @description
+     *    根据主键id删除菜单数据
+     * @param: [id]
+     * @date 2020/6/2
+     * @return com.aaa.six.base.ResultData
+     * @throws 
+     **/
     @DeleteMapping("deleteMenuByPrimaryKey")
     public ResultData deleteMenuByPrimaryKey(@RequestBody Object id){
         Integer deleteResult = menuService.deleteMenuByPrimaryKey(id);
@@ -110,11 +134,14 @@ public class MenuController extends BaseController {
         return super.deleteFailed();
     }
     /**
-     * @Author: He create on 2020/5/21 23:25
+     * @author lwq 
+     * @description
+     *    根据前台传入的list  遍历map id 进行删除操作
      * @param: [list]
-     * @return: com.aaa.zk.base.ResultData
-     * @Description: 根据前台传入的list  遍历map id 进行删除操作
-     */
+     * @date 2020/6/2
+     * @return com.aaa.six.base.ResultData
+     * @throws 
+     **/
     @DeleteMapping("deleteMenuByPrimaryKeyList")
     public ResultData deleteDeptByPrimaryKeyList(@RequestBody List<Map> list){
         Integer integer = menuService.deleteMenuByPrimaryKeyList(list);
