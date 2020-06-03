@@ -89,4 +89,17 @@ public interface IQYMappingProjectService {
      */
     @PostMapping("/mappingProjectByPage")
     PageInfo queryListByPage(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
+
+    /**
+     *@Description: TODO
+     * 条件分页查询
+     *@Param :  [pageNo, pageSize, mappingProject]
+     *@MethodName: MappingProjectPageFiled
+     *@Author: lifuju
+     *@Date: 2020/6/1 21:22
+     *@Return: com.github.pagehelper.PageInfo<com.aaa.six.model.MappingProject>
+     */
+
+    @PostMapping("/MappingProjectPageFiled")
+    PageInfo<MappingProject> MappingProjectPageFiled(@RequestParam("pageNo") Integer pageNo,@RequestParam("pageSize") Integer pageSize,@RequestBody MappingProject mappingProject);
 }

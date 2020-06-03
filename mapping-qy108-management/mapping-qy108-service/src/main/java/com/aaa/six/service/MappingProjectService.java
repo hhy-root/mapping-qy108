@@ -4,14 +4,18 @@ import com.aaa.six.base.BaseModel;
 import com.aaa.six.base.BaseService;
 import com.aaa.six.mapper.MappingProjectMapper;
 import com.aaa.six.model.MappingProject;
+import com.aaa.six.utils.DateUtils;
 import com.aaa.six.utils.IDUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.util.Sqls;
 
+import javax.xml.crypto.Data;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -44,7 +48,7 @@ public class MappingProjectService extends BaseService<MappingProject> {
     @Override
     public Integer add(MappingProject mappingProject){
         mappingProject.setId(IDUtils.genUniqueKey());
-        mappingProject.setCreateTime(getCurrentTime());
+        mappingProject.setCreateTime(DateUtils.getCurrentDate());
         try {
             return super.add(mappingProject);
         } catch (Exception e) {
@@ -106,7 +110,7 @@ public class MappingProjectService extends BaseService<MappingProject> {
 
     @Override
     public Integer update(MappingProject mappingProject){
-        mappingProject.setCreateTime(getCurrentTime());
+        mappingProject.setCreateTime(DateUtils.getCurrentDate());
         try {
             return super.update(mappingProject);
         } catch (Exception e) {
@@ -143,7 +147,7 @@ public class MappingProjectService extends BaseService<MappingProject> {
      */
     @Override
     public Integer batchUpdate(MappingProject mappingProject, Object[] ids){
-        mappingProject.setModifyTime(getCurrentTime());
+        mappingProject.setModifyTime(DateUtils.getCurrentDate());
         try {
             return super.batchUpdate(mappingProject, ids);
         } catch (Exception e) {
@@ -170,22 +174,22 @@ public class MappingProjectService extends BaseService<MappingProject> {
         }
         return null;
     }
-
     /**
      *@Description: TODO
-     * 条件查询分页
-     *@Param :  [pageNo, pageSize, where, orderByFileds, fields]
-     *@MethodName: queryListByPageAndFields
+     * 条件分页
+     *@Param :  [pageNo, pageSize, mappingProject]
+     *@MethodName: selectPageFiled
      *@Author: lifuju
-     *@Date: 2020/5/21 14:24
+     *@Date: 2020/6/1 19:23
      *@Return: com.github.pagehelper.PageInfo<com.aaa.six.model.MappingProject>
      */
-    @Override
-    public PageInfo<MappingProject> queryListByPageAndFields(Integer pageNo, Integer pageSize, Sqls where, String orderByFileds, String... fields){
-        try {
-            return super.queryListByPageAndFields(pageNo, pageSize, where, orderByFileds, fields);
-        } catch (Exception e) {
-            e.printStackTrace();
+
+    public PageInfo<MappingProject> selectPageFiled(Integer pageNo, Integer pageSize,MappingProject mappingProject) {
+        PageHelper.startPage(pageNo, pageSize);
+        List<MappingProject> mappingProjects = mappingProjectMapper.select(mappingProject);
+        if (!"".equals(mappingProjects) && null != mappingProjects) {
+            PageInfo<MappingProject> pageInfo = new PageInfo<MappingProject>(mappingProjects);
+            return pageInfo;
         }
         return null;
     }
