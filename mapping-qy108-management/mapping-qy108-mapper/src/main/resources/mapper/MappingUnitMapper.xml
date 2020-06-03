@@ -83,4 +83,16 @@
     WHERE id=#{id, jdbcType=BIGINT}
   </select>
 
+  <select id="selectUnitAudit" resultType="BaseResultMap" >
+    select * from t_mapping_unit
+    <where>
+    1=1
+      <if test="unitName != null and unitName != '' ">
+        AND unit_name like CONCAT('%', CONCAT(#{unitName, jdbcType=VARCHAR},'%'))
+      </if>
+      <if test="auditStatus !=null">
+        AND audit_status=#{auditStatus,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
 </mapper>

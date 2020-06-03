@@ -4,6 +4,7 @@ import com.aaa.six.base.BaseController;
 import com.aaa.six.base.ResultData;
 import com.aaa.six.model.MappingUnit;
 import com.aaa.six.service.IQYMappingUnitService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -72,6 +73,100 @@ public class MappingUnitController extends BaseController {
             // 查询失败，返回系统信息
             return selectFailed();
         }
+    }
+
+    /**
+     *@Description: TODO
+     * 单位条件查询
+     *@Param :  [pageNo, pageSize, mappingUnit]
+     *@MethodName: selectUnitByPage
+     *@Author: lifuju
+     *@Date: 2020/6/3 23:07
+     *@Return: com.github.pagehelper.PageInfo<com.aaa.six.model.MappingUnit>
+     */
+    @PostMapping("/selectUnitByPage")
+    public ResultData selectUnitByPage(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize, @RequestBody MappingUnit mappingUnit){
+        PageInfo<MappingUnit> mappingUnitPageInfo = iqyMappingUnitService.selectUnitByPage(pageNo, pageSize, mappingUnit);
+        // 判断 结果是否为空
+        if (null != mappingUnitPageInfo) {
+            // 说明结果不为空，查询成功，返回系统消息，自定义返回值
+            return selectSuccess(mappingUnitPageInfo);
+        }
+            // 查询失败，返回系统信息
+            return selectFailed();
+    }
+
+    /**
+     *@Description: TODO
+     *  企业注册 单位新增
+     *@Param :  [mappingUnit]
+     *@MethodName: addUnit
+     *@Author: lifuju
+     *@Date: 2020/6/3 23:25
+     *@Return: java.lang.Integer
+     */
+    @PostMapping("/addUnit")
+    public ResultData addUnit(@RequestBody MappingUnit mappingUnit){
+
+        Integer integer = iqyMappingUnitService.addUnit(mappingUnit);
+        if (integer != null) {
+            return insertSuccess();
+        }
+        return insertFailed();
+    }
+
+    /**
+     *@Description: TODO
+     * 通过主键  单个查询单位
+     *@Param :  [id]
+     *@MethodName: selectUnitOne
+     *@Author: lifuju
+     *@Date: 2020/6/3 23:29
+     *@Return: com.aaa.six.model.MappingUnit
+     */
+    @PostMapping("/selectUnitOne")
+    public ResultData selectUnitOne(@RequestParam("id") Long id){
+        MappingUnit mappingUnit = iqyMappingUnitService.selectUnitOne(id);
+        if (mappingUnit != null) {
+            return selectSuccess(mappingUnit);
+        }
+        return selectFailed();
+    }
+
+    /**
+     *@Description: TODO
+     * 单个更新
+     *@Param :  [mappingUnit]
+     *@MethodName: updateUnitOne
+     *@Author: lifuju
+     *@Date: 2020/6/3 23:32
+     *@Return: java.lang.Integer
+     */
+    @PostMapping("/updateUnitOne")
+    public ResultData updateUnitOne(@RequestBody MappingUnit mappingUnit){
+        Integer integer = iqyMappingUnitService.updateUnitOne(mappingUnit);
+        if (integer != null) {
+            return updateSuccess();
+        }
+        return updateFailed();
+    }
+
+    /**
+     *@Description: TODO
+     * 审核查询
+     *@Param :  [pageNo, pageSize, unitName, auditStatus]
+     *@MethodName: selectUnitAudit
+     *@Author: lifuju
+     *@Date: 2020/6/3 23:49
+     *@Return: com.github.pagehelper.PageInfo
+     */
+    @PostMapping("/selectUnitAudit")
+    public ResultData selectUnitAudit(@RequestParam("pageNo") Integer pageNo,@RequestParam("pageSize")Integer pageSize,@RequestParam("unitName") String unitName,@RequestParam("auditStatus") Integer auditStatus){
+        PageInfo pageInfo = iqyMappingUnitService.selectUnitAudit(pageNo, pageSize, unitName, auditStatus);
+        if (pageInfo != null) {
+            return selectSuccess(pageInfo);
+        }
+        return selectFailed();
     }
 
 }

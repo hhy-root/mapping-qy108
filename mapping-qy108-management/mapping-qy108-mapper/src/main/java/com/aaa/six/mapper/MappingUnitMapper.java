@@ -36,4 +36,14 @@ public interface MappingUnitMapper extends Mapper<MappingUnit> {
      **/
     MappingUnit selectUnitInfoById(Long id);
 
+    /**
+     *@Description: TODO
+     *@Param :  []
+     *@MethodName: selectUnitAudit
+     *@Author: lifuju
+     *@Date: 2020/6/3 23:11
+     *@Return: java.util.List<com.aaa.six.model.MappingUnit>
+     */
+    List<MappingUnit> selectUnitAudit(@Param("unitName") String unitName,@Param("auditStatus")Integer auditStatus);
+
 }
