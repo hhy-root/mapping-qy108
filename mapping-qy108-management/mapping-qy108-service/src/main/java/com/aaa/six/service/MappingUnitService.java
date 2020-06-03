@@ -1,8 +1,15 @@
 package com.aaa.six.service;
 
 import com.aaa.six.base.BaseService;
+import com.aaa.six.mapper.MappingProjectMapper;
 import com.aaa.six.mapper.MappingUnitMapper;
 import com.aaa.six.model.MappingUnit;
+import com.aaa.six.utils.DateUtils;
+import com.aaa.six.utils.IDUtils;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -69,6 +76,97 @@ public class MappingUnitService extends BaseService<MappingUnit> {
             return null;
         }
     }
+    /**
+     *@Description: TODO
+     * 单位条件查询
+     *@Param :  [pageNo, pageSize, mappingUnit]
+     *@MethodName: selectUnitByPage
+     *@Author: lifuju
+     *@Date: 2020/6/3 23:07
+     *@Return: com.github.pagehelper.PageInfo<com.aaa.six.model.MappingUnit>
+     */
+    public PageInfo<MappingUnit> selectUnitByPage(Integer pageNo, Integer pageSize, MappingUnit mappingUnit){
+        PageHelper.startPage(pageNo,pageSize);
+        List<MappingUnit> select = mappingUnitMapper.select(mappingUnit);
+        PageInfo<MappingUnit> mappingUnitPageInfo = new PageInfo<>(select);
+        if (null!=mappingUnitPageInfo){
+            return mappingUnitPageInfo;
+        }
+        return null;
+    }
 
+    /**
+     *@Description: TODO
+     *  企业注册 单位新增
+     *@Param :  [mappingUnit]
+     *@MethodName: addUnit
+     *@Author: lifuju
+     *@Date: 2020/6/3 23:25
+     *@Return: java.lang.Integer
+     */
+    public Integer addUnit(MappingUnit mappingUnit){
+        mappingUnit.setId(IDUtils.genUniqueKey());
+        mappingUnit.setCreateTime(DateUtils.getCurrentDate());
+        try {
+            return  super.add(mappingUnit);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
+    /**
+     *@Description: TODO
+     * 通过主键  单个查询单位
+     *@Param :  [id]
+     *@MethodName: selectUnitOne
+     *@Author: lifuju
+     *@Date: 2020/6/3 23:29
+     *@Return: com.aaa.six.model.MappingUnit
+     */
+    public MappingUnit selectUnitOne(Long id){
+
+        MappingUnit mappingUnit = mappingUnitMapper.selectByPrimaryKey(id);
+        if (mappingUnit != null) {
+            return mappingUnit;
+        }
+        return null;
+    }
+
+    /**
+     *@Description: TODO
+     * 单个更新
+     *@Param :  [mappingUnit]
+     *@MethodName: updateUnitOne
+     *@Author: lifuju
+     *@Date: 2020/6/3 23:32
+     *@Return: java.lang.Integer
+     */
+    public Integer updateUnitOne(MappingUnit mappingUnit){
+        try {
+            return super.update(mappingUnit);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     *@Description: TODO
+     * 审核查询
+     *@Param :  [pageNo, pageSize, unitName, auditStatus]
+     *@MethodName: selectUnitAudit
+     *@Author: lifuju
+     *@Date: 2020/6/3 23:49
+     *@Return: com.github.pagehelper.PageInfo
+     */
+    public PageInfo selectUnitAudit(Integer pageNo,Integer pageSize,String unitName,Integer auditStatus){
+        PageHelper.startPage(pageNo,pageSize);
+        List<MappingUnit> mappingUnits = mappingUnitMapper.selectUnitAudit(unitName, auditStatus);
+        PageInfo<MappingUnit> mappingUnitPageInfo = new PageInfo<>(mappingUnits);
+        if (mappingUnitPageInfo != null) {
+            return mappingUnitPageInfo;
+        }
+        return null;
+    }
 }

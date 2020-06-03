@@ -144,7 +144,23 @@ public class MappingProjectController extends BaseController{
         return selectFailed();
 
     }
-
-
+    /**
+     *@Description: TODO
+     * 分页条件查询
+     *@Param :  [pageNo, pageSize, mappingProject]
+     *@MethodName: MappingProjectPageFiled
+     *@Author: lifuju
+     *@Date: 2020/6/3 21:25
+     *@Return: com.aaa.six.base.ResultData
+     */
+    @PostMapping("/MappingProjectPageFiled")
+    @ApiOperation(value = "项目管理", notes = "分页条件查询")
+    public ResultData MappingProjectPageFiled(@RequestParam("pageNo") Integer pageNo,@RequestParam("pageSize") Integer pageSize,@RequestBody MappingProject mappingProject){
+        PageInfo<MappingProject> mappingProjectPageInfo = qyService.MappingProjectPageFiled(pageNo, pageSize, mappingProject);
+        if (null!=mappingProjectPageInfo){
+            return selectSuccess(mappingProjectPageInfo);
+        }
+        return selectFailed();
+    }
 
 }

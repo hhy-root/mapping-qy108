@@ -148,24 +148,22 @@ public class MappingProjectController extends CommonController<MappingProject> {
         return null;
     }
 
+/**
+ *@Description: TODO
+ * 分页条件查询
+ *@Param :  [pageNo, pageSize, mappingProject]
+ *@MethodName: MappingProjectPageFiled
+ *@Author: lifuju
+ *@Date: 2020/6/3 22:07
+ *@Return: com.github.pagehelper.PageInfo<com.aaa.six.model.MappingProject>
+ */
 
-    /**
-     *@Description: TODO
-     *@Param :  [pageNo, pageSize, where, orderByFileds, fields]
-     *@MethodName: queryListByPageAndFields
-     *@Author: lifuju
-     *@Date: 2020/5/24 10:26
-     *@Return: com.github.pagehelper.PageInfo
-     */
-    @PostMapping("/mappingQueryListByPageAndFields")
-    public PageInfo queryListByPageAndFields(Integer pageNo, Integer pageSize, Sqls where, String orderByFileds, String... fields){
-        try {
-            return mappingProjectService.queryListByPageAndFields(pageNo,pageSize,where,orderByFileds,fields);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+@PostMapping("/MappingProjectPageFiled")
+    public PageInfo<MappingProject> MappingProjectPageFiled(@RequestParam("pageNo") Integer pageNo,@RequestParam("pageSize") Integer pageSize,@RequestBody MappingProject mappingProject) {
+        return  mappingProjectService.selectPageFiled(pageNo,pageSize,mappingProject);
     }
+
+
 
 
 }
