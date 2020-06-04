@@ -1,5 +1,6 @@
 package com.aaa.six.mapper;
 
+import com.aaa.six.model.TechTypeNum;
 import com.aaa.six.model.Technicist;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -13,4 +14,6 @@ public interface TechnicistMapper extends Mapper<Technicist> {
      * @return
      */
     List<Technicist> selectTechnicist(Long userId);
+
+    List<TechTypeNum> selectTechTypeNum(Long userId);
 }

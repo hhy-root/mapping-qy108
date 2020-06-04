@@ -2,6 +2,7 @@ package com.aaa.six.service;
 
 
 import com.aaa.six.model.MappingUnit;
+import com.aaa.six.model.MappingUnitLevelNum;
 import com.github.pagehelper.PageInfo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
@@ -104,4 +105,33 @@ public interface IQYMappingUnitService {
      */
     @PostMapping("/selectUnitAudit")
     PageInfo selectUnitAudit(@RequestParam("pageNo") Integer pageNo,@RequestParam("pageSize")Integer pageSize,@RequestParam("unitName") String unitName,@RequestParam("auditStatus") Integer auditStatus);
+
+
+    /**
+     * @Author: ly
+     * @description:
+     *
+     *      单位资质统计
+     * @date: 2020/6/2
+     * @param
+     * @return: java.util.List<com.aaa.six.model.MappingUnitLevelNum>
+     *
+     */
+    @GetMapping("/getUnitLevelNum")
+    List<MappingUnitLevelNum> getUnitLevelNum();
+
+
+    /**
+     * @Author: ly
+     * @description:
+     *
+     *      数据统计 单位信息统计
+     * @date: 2020/6/2
+     * @param pageNo
+     * @param pageSize
+     * @return: com.github.pagehelper.PageInfo
+     *
+     */
+    @PostMapping("/getAllUnit")
+    PageInfo getAllUnit(@RequestParam("pageNo") Integer pageNo,@RequestParam("pageSize") Integer pageSize);
 }

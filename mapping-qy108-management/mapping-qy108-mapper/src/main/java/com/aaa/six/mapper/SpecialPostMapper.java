@@ -17,4 +17,15 @@ public interface SpecialPostMapper extends Mapper<SpecialPost> {
      * @throws 
      **/
     List<SpecialPost> selectSpecialPost(Long userId);
+    /**
+     * @Author: ly
+     * @description:
+     *
+     *      根据userId 查询单位特殊人才数量
+     * @date: 2020/6/4
+     * @param userId
+     * @return: java.lang.Integer
+     *
+     */
+    Integer getSpecialPostNum(Long userId);
 }

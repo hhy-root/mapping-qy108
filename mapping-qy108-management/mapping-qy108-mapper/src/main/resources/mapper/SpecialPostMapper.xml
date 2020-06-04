@@ -26,4 +26,7 @@
     from t_special_post
     where user_id = #{userId,jdbcType=BIGINT}
   </select>
+  <select id="getSpecialPostNum" parameterType="SpecialPost" resultType="Integer">
+    select count(1) num from t_special_post where user_id = #{userId}
+  </select>
 </mapper>

@@ -1,10 +1,8 @@
 package com.aaa.six.controller;
 
 import com.aaa.six.model.MappingUnit;
+import com.aaa.six.model.MappingUnitLevelNum;
 import com.aaa.six.service.MappingUnitService;
-import com.aaa.six.utils.DateUtils;
-import com.aaa.six.utils.IDUtils;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -146,4 +144,49 @@ public class MappingUnitController {
     PageInfo selectUnitAudit(@RequestParam("pageNo") Integer pageNo,@RequestParam("pageSize")Integer pageSize,@RequestParam("unitName") String unitName,@RequestParam("auditStatus") Integer auditStatus){
         return mappingUnitService.selectUnitAudit(pageNo,pageSize,unitName,auditStatus);
     }
+
+    /**
+     * @Author: ly
+     * @description:
+     *
+     *  资质单位统计
+     * @date: 2020/6/2
+     * @param
+     * @return: java.util.List<com.aaa.six.model.MappingUnitLevelNum>
+     *
+     */
+    @GetMapping("/getUnitLevelNum")
+    public List<MappingUnitLevelNum> getUnitLevelNum(){
+        try {
+            return mappingUnitService.getUnitLevelNum();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    /**
+     * @Author: ly
+     * @description:
+     *
+     *      数据统计 单位信息统计
+     * @date: 2020/6/2
+     * @param pageNo
+     * @param pageSize
+     * @return: com.github.pagehelper.PageInfo
+     *
+     */
+    @PostMapping("/getAllUnit")
+    public PageInfo getAllUnit(@RequestParam("pageNo") Integer pageNo,@RequestParam("pageSize") Integer pageSize){
+        try {
+            return mappingUnitService.getAllUnit(pageNo,pageSize);
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
 }

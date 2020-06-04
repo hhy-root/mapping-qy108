@@ -23,7 +23,7 @@ import java.util.List;
  *      用户管理
  **/
 @RestController
-@Api(value = "项目管理信息", tags = "项目管理接口")
+@Api(value = "用户管理", tags = "用户管理接口")
 public class UserController extends BaseController {
 
     @Autowired
@@ -58,6 +58,7 @@ public class UserController extends BaseController {
      * @throws
      **/
     @PostMapping("/selectInfoById")
+    @ApiOperation(value = "查询功能", notes = "单个查询")
     public ResultData selectInfoById(User user){
         User user1 = iqyUserService.selectInfoById(user);
         if (null != user1 && !"".equals(user1)){
@@ -76,6 +77,7 @@ public class UserController extends BaseController {
      * @throws
      **/
     @PostMapping("/deleteUserById")
+    @ApiOperation(value = "删除功能", notes = "删除")
     public ResultData deleteUserById(User user){
         Boolean aBoolean = iqyUserService.deleteUserById(user);
         if (aBoolean){
@@ -93,6 +95,7 @@ public class UserController extends BaseController {
      * @throws
      **/
     @PostMapping("/addUser")
+    @ApiOperation(value = "添加功能", notes = "添加")
     public ResultData addUser(User user){
         Boolean aBoolean = iqyUserService.addUser(user);
         if (aBoolean){
@@ -110,6 +113,7 @@ public class UserController extends BaseController {
      * @throws 
      **/
     @PostMapping("/updateUser")
+    @ApiOperation(value = "修改功能", notes = "单个修改")
     public ResultData updateUser(User user){
         Boolean aBoolean = iqyUserService.updateUser(user);
         if (aBoolean){
@@ -130,6 +134,7 @@ public class UserController extends BaseController {
      * @throws 
      **/
     @PostMapping("/deleteUserByIds")
+    @ApiOperation(value = "删除功能", notes = "批量删除")
     public ResultData deleteUserByIds(@RequestBody List<Object> ids){
         Integer integer = iqyUserService.deleteUserByIds(ids);
         if (integer > 0 ){
@@ -149,6 +154,7 @@ public class UserController extends BaseController {
      * @throws 
      **/
     @PostMapping("/selectUserByField")
+    @ApiOperation(value = "查询功能", notes = "用户条件查询分页")
     public ResultData selectUserByField(User user, Integer pageNo, Integer pageSize){
         PageInfo pageInfo = iqyUserService.selectUserByField(user, pageNo, pageSize);
         //判断查询是否成功
@@ -168,6 +174,7 @@ public class UserController extends BaseController {
      * @throws
      **/
     @GetMapping("/selectUserBySsex")
+    @ApiOperation(value = "查询功能", notes = "用户性别查询")
     public ResultData selectUserBySsex(String ssex, Integer pageNo, Integer pageSize){
         PageInfo pageInfo = iqyUserService.selectUserBySsex(ssex, pageNo, pageSize);
         if (!"".equals(pageInfo) && null !=pageInfo){
@@ -186,6 +193,7 @@ public class UserController extends BaseController {
      * @throws
      **/
     @GetMapping("/selectUserBySta")
+    @ApiOperation(value = "查询功能", notes = "根据状态查询")
     public ResultData selectUserBySta(String status,Integer pageNo,Integer pageSize){
         PageInfo pageInfo = iqyUserService.selectUserBySta(status, pageNo, pageSize);
         if (!"".equals(pageInfo) && null !=pageInfo){
@@ -204,6 +212,7 @@ public class UserController extends BaseController {
      * @throws
      **/
     @PostMapping("/resetUserPwd")
+    @ApiOperation(value = "密码重置", notes = "密码重置")
     public ResultData resetUserPwd(User user){
         Integer integer = iqyUserService.resetUserPwd(user);
         if (integer!=null){

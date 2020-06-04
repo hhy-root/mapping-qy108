@@ -4,6 +4,7 @@ import com.aaa.six.base.BaseService;
 import com.aaa.six.base.CommonController;
 import com.aaa.six.base.ResultData;
 import com.aaa.six.model.MappingProject;
+import com.aaa.six.model.MappingProjectTypeNum;
 import com.aaa.six.service.MappingProjectService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -164,6 +165,27 @@ public class MappingProjectController extends CommonController<MappingProject> {
     }
 
 
+    /**
+     * @Author: ly
+     * @description:
+     *
+     *      项目类型统计
+     * @date: 2020/6/2
+     * @param
+     * @return: java.util.List<com.aaa.six.model.MappingProjectTypeNum>
+     *
+     */
+    @GetMapping("/getProjectTypeNum")
+    public List<MappingProjectTypeNum> getProjectTypeNum(){
+
+        try {
+            return mappingProjectService.getProjectTypeNum();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
 
 }

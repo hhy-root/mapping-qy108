@@ -37,4 +37,9 @@
   <select id="selectTechnicist" parameterType="Technicist" resultType="Technicist">
     select id,name,id_number,major_type,sex,age,major,duty from t_technicist where user_id=#{userId}
   </select>
+
+  <select id="selectTechTypeNum" resultType="com.aaa.six.model.TechTypeNum" parameterType="com.aaa.six.model.Technicist">
+    select major_type,count(major_type) num from t_technicist where user_id = #{userId}
+    GROUP BY major_type
+  </select>
 </mapper>

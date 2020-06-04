@@ -2,6 +2,7 @@ package com.aaa.six.mapper;
 
 
 import com.aaa.six.model.MappingProject;
+import com.aaa.six.model.MappingProjectTypeNum;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
@@ -40,4 +41,27 @@ public interface MappingProjectMapper extends Mapper<MappingProject> {
      * @return
      */
     List<MappingProject> selectAuditResults();
+    /**
+     * @Author: ly
+     * @description:
+     *      项目类型统计
+     * @date: 2020/6/2
+     * @param
+     * @return: java.util.List<com.aaa.six.model.MappingProjectTypeNum>
+     *
+     */
+    List<MappingProjectTypeNum> getProjectTypeNum();
+
+
+    /**
+     * @Author: ly
+     * @description:
+     *
+     *      根据userId得到单位的项目数量
+     * @date: 2020/6/4
+     * @param userId
+     * @return: java.lang.Integer
+     *
+     */
+    Integer getProjectNum(Long userId);
 }

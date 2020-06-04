@@ -73,4 +73,15 @@
   <select id="selectAuditResults" resultMap="BaseResultMap">
     select * from t_mapping_project where results_status =0
   </select>
+
+
+  <select id="getProjectTypeNum" resultType="com.aaa.six.model.MappingProjectTypeNum">
+    select project_type,status,count(`status`) num from t_mapping_project
+    GROUP BY project_type,status
+  </select>
+
+
+  <select id="getProjectNum" resultType="Integer" parameterType="com.aaa.six.model.MappingProject">
+    select count(1) num from t_mapping_project where user_id = #{userId}
+  </select>
 </mapper>

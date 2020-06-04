@@ -3,8 +3,10 @@ package com.aaa.six.controller;
 
 import com.aaa.six.base.BaseController;
 import com.aaa.six.base.ResultData;
+import com.aaa.six.model.TechResult;
 import com.aaa.six.model.Technicist;
 import com.aaa.six.service.IQYTechService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +22,7 @@ import java.util.List;
  *      技术员信息管理
  **/
 @RestController
+@Api(value = "技术员信息管理", tags = "技术员信息管理")
 public class TechnicistController extends BaseController {
 
     @Autowired
@@ -96,5 +99,24 @@ public class TechnicistController extends BaseController {
         }else {
             return super.updateFailed();
         }
+    }
+
+    /**
+     * @Author: ly
+     * @description:
+     *
+     *       数据统计  获取单位技术人员 和项目数量
+     * @date: 2020/6/3
+     * @param userId
+     * @return: com.aaa.six.model.TechResult
+     *
+     */
+    @PostMapping("/selectTechTypeNum")
+    public ResultData selectTechTypeNum(@RequestParam("userId") Integer userId){
+        TechResult techResult = iqyTechService.selectTechTypeNum(userId);
+        if (null!=techResult && !"".equals(techResult)){
+            return selectSuccess(techResult);
+        }
+        return null;
     }
 }

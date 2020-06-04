@@ -1,6 +1,7 @@
 package com.aaa.six.service;
 
 import com.aaa.six.model.MappingProject;
+import com.aaa.six.model.MappingProjectTypeNum;
 import com.github.pagehelper.PageInfo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
@@ -102,4 +103,19 @@ public interface IQYMappingProjectService {
 
     @PostMapping("/MappingProjectPageFiled")
     PageInfo<MappingProject> MappingProjectPageFiled(@RequestParam("pageNo") Integer pageNo,@RequestParam("pageSize") Integer pageSize,@RequestBody MappingProject mappingProject);
+
+
+    /**
+     * @Author: ly
+     * @description:
+     *
+     *      项目类型统计
+     * @date: 2020/6/2
+     * @param
+     * @return: java.util.List<com.aaa.six.model.MappingProjectTypeNum>
+     *
+     */
+    @GetMapping("/getProjectTypeNum")
+    List<MappingProjectTypeNum> getProjectTypeNum();
+
 }

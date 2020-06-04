@@ -1,12 +1,17 @@
 package com.aaa.six.service;
 
 import com.aaa.six.base.BaseService;
+import com.aaa.six.mapper.MappingProjectMapper;
+import com.aaa.six.mapper.SpecialPostMapper;
 import com.aaa.six.mapper.TechnicistMapper;
+import com.aaa.six.model.TechResult;
+import com.aaa.six.model.TechTypeNum;
 import com.aaa.six.model.Technicist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +29,11 @@ public class TechnicistService extends BaseService<Technicist> {
     @Autowired
     private TechnicistMapper technicistMapper;
 
+    @Autowired
+    private SpecialPostMapper specialPostMapper;
+
+    @Autowired
+    private MappingProjectMapper mappingProjectMapper;
     /**
      * @author lwq 
      * @description
@@ -120,5 +130,48 @@ public class TechnicistService extends BaseService<Technicist> {
             }
         }
 
+    }
+
+
+    /**
+     * @Author: ly
+     * @description:
+     *
+     *      数据统计  获取单位技术人员 和项目数量
+     * @date: 2020/6/3
+     * @param userId
+     * @return: java.lang.String
+     *
+     */
+    public TechResult selectTechTypeNum(Integer userId){
+        List<TechTypeNum> techTypeNum = technicistMapper.selectTechTypeNum(userId.longValue());
+        TechResult techResult = new TechResult();
+        List nameList = new ArrayList();
+        List valueList = new ArrayList();
+
+        if(techTypeNum.size()>0){
+            Integer i = 0;
+            for (TechTypeNum tech:techTypeNum) {
+                nameList.add(i,tech.getMajorType());
+                valueList.add(i,tech.getNum());
+            }
+
+            //得到特殊人才数量
+            Integer specialPostNum = specialPostMapper.getSpecialPostNum(userId.longValue());
+            nameList.add("特岗人员");
+            valueList.add(specialPostNum);
+
+            //得到项目数量
+            Integer projectNum = mappingProjectMapper.getProjectNum(userId.longValue());
+            nameList.add("项目数量");
+            valueList.add(projectNum);
+
+            //封装前台需要的数据
+            techResult.setName(nameList);
+            techResult.setValue(valueList);
+
+            return techResult;
+        }
+        return null;
     }
 }

@@ -4,6 +4,7 @@ import com.aaa.six.base.BaseController;
 import com.aaa.six.base.ResultData;
 import com.aaa.six.model.SpecialPost;
 import com.aaa.six.service.IQYSpecialPostService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,7 @@ import java.util.List;
  *      特殊岗位人员信息管理
  **/
 @RestController
+@Api(value = "特殊岗位人员信息管理", tags = "特殊岗位人员信息管理")
 public class SpecialPostController extends BaseController {
 
     @Autowired

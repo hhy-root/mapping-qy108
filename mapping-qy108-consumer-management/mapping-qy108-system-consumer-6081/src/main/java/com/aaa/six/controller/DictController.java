@@ -5,6 +5,7 @@ import com.aaa.six.base.ResultData;
 import com.aaa.six.model.Dict;
 import com.aaa.six.service.IQYDictService;
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,7 @@ import java.util.List;
  *      字典管理
  **/
 @RestController
+@Api(value = "字典管理", tags = "字典管理")
 public class DictController extends BaseController {
 
     @Autowired

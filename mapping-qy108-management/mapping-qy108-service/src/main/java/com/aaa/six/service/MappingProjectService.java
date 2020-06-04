@@ -5,6 +5,7 @@ import com.aaa.six.base.BaseService;
 import com.aaa.six.mapper.MappingProjectMapper;
 import com.aaa.six.model.Audit;
 import com.aaa.six.model.MappingProject;
+import com.aaa.six.model.MappingProjectTypeNum;
 import com.aaa.six.model.MappingUnit;
 import com.aaa.six.utils.DateUtils;
 import com.aaa.six.utils.IDUtils;
@@ -209,4 +210,26 @@ public class MappingProjectService extends BaseService<MappingProject> {
         return null;
     }
 
+    /**
+     * @Author: ly
+     * @description:
+     *      项目类型统计
+     * @date: 2020/6/2
+     * @param
+     * @return: java.lang.String
+     *
+     */
+    public List<MappingProjectTypeNum> getProjectTypeNum(){
+
+        try {
+            List<MappingProjectTypeNum> projectTypeNum = mappingProjectMapper.getProjectTypeNum();
+            if(projectTypeNum.size()>0){
+                return projectTypeNum;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }

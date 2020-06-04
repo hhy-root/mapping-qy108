@@ -95,4 +95,9 @@
       </if>
     </where>
   </select>
+
+  <select id="getUnitLevelNum" resultType="com.aaa.six.model.MappingUnitLevelNum">
+    SELECT qualification_level name,count(qualification_level) value from t_mapping_unit
+    GROUP BY qualification_level
+  </select>
 </mapper>

@@ -3,6 +3,7 @@ package com.aaa.six.controller;
 import com.aaa.six.service.IQYFtpService;
 import com.aaa.six.base.BaseController;
 import com.aaa.six.base.ResultData;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @Version: 1.0
  */
 @RestController
+@Api(value = "文件上传下载", tags = "文件上传下载")
 public class FtpController extends BaseController{
     @Autowired
     private IQYFtpService qyService;

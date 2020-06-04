@@ -5,6 +5,7 @@ import com.aaa.six.mapper.MappingProjectMapper;
 import com.aaa.six.mapper.MappingUnitMapper;
 import com.aaa.six.model.Audit;
 import com.aaa.six.model.MappingUnit;
+import com.aaa.six.model.MappingUnitLevelNum;
 import com.aaa.six.utils.DateUtils;
 import com.aaa.six.utils.IDUtils;
 import com.github.pagehelper.Page;
@@ -185,4 +186,53 @@ public class MappingUnitService extends BaseService<MappingUnit> {
         }
         return null;
     }
+
+    /**
+     * @Author: ly
+     * @description:
+     *
+     *      资质单位统计
+     * @date: 2020/6/2
+     * @param
+     * @return: com.aaa.six.model.MappingUnitLevelNum
+     *
+     */
+    public List<MappingUnitLevelNum> getUnitLevelNum(){
+
+        try {
+            List<MappingUnitLevelNum> unitLevelNums= mappingUnitMapper.getUnitLevelNum();
+            if(unitLevelNums.size()>0){
+
+                return unitLevelNums;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return null;
+    }
+
+    /**
+     * @Author: ly
+     * @description:
+     *
+     *      数据统计  单位信息统计
+     * @date: 2020/6/2
+     * @param pageNo
+     * @param pageSize
+     * @return: com.github.pagehelper.PageInfo
+     *
+     */
+    public PageInfo getAllUnit(Integer pageNo,Integer pageSize){
+        PageHelper.startPage(pageNo,pageSize);
+        List<MappingUnit> mappingUnits = mappingUnitMapper.selectAll();
+        if(null!=mappingUnits && mappingUnits.size()>0){
+            PageInfo pageInfo = new PageInfo(mappingUnits);
+            return pageInfo;
+        }
+
+        return null;
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.aaa.six.service;
 
+import com.aaa.six.model.TechResult;
 import com.aaa.six.model.Technicist;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
@@ -60,5 +61,18 @@ public interface IQYTechService {
      **/
     @PostMapping("/updateTechnicist")
     Boolean updateTechnicist(@RequestBody Technicist technicist);
+
+    /**
+     * @Author: ly
+     * @description:
+     *
+     *       数据统计  获取单位技术人员 和项目数量
+     * @date: 2020/6/3
+     * @param userId
+     * @return: com.aaa.six.model.TechResult
+     *
+     */
+    @PostMapping("/selectTechTypeNum")
+    TechResult selectTechTypeNum(@RequestParam("userId") Integer userId);
 
 }

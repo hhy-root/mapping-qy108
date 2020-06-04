@@ -3,6 +3,8 @@ package com.aaa.six.controller;
 import com.aaa.six.base.BaseController;
 import com.aaa.six.base.ResultData;
 import com.aaa.six.model.Dept;
+import com.aaa.six.service.IQYDeptService;
+import com.aaa.six.service.IQYEquipmentService;
 import com.aaa.six.service.IQYService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
@@ -13,11 +15,11 @@ import java.util.List;
 
 
 @RestController
-@Api(value = "部门信息", tags = "部门管理板块")
+@Api(value = "部门管理", tags = "部门管理")
 public class DeptController extends BaseController {
 
     @Autowired
-    private IQYService qyService;
+    private IQYDeptService qyService;
     /**
      * @Author: ly
      * @description:

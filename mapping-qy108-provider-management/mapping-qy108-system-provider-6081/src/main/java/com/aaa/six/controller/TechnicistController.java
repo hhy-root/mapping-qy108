@@ -1,5 +1,6 @@
 package com.aaa.six.controller;
 
+import com.aaa.six.model.TechResult;
 import com.aaa.six.model.Technicist;
 import com.aaa.six.service.TechnicistService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,5 +87,20 @@ public class TechnicistController {
     @PostMapping("/updateTechnicist")
     public Boolean updateTechnicist(@RequestBody Technicist technicist){
         return technicistService.updateTechnicist(technicist);
+    }
+
+    /**
+     * @Author: ly
+     * @description:
+     *
+     *       数据统计  获取单位技术人员 和项目数量
+     * @date: 2020/6/3
+     * @param userId
+     * @return: com.aaa.six.model.TechResult
+     *
+     */
+    @PostMapping("/selectTechTypeNum")
+    public TechResult selectTechTypeNum(@RequestParam("userId") Integer userId){
+        return technicistService.selectTechTypeNum(userId);
     }
 }

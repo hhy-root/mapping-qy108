@@ -1,6 +1,7 @@
 package com.aaa.six.mapper;
 
 import com.aaa.six.model.MappingUnit;
+import com.aaa.six.model.MappingUnitLevelNum;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestParam;
 import tk.mybatis.mapper.common.Mapper;
@@ -46,4 +47,15 @@ public interface MappingUnitMapper extends Mapper<MappingUnit> {
      */
     List<MappingUnit> selectUnitAudit(@Param("unitName") String unitName,@Param("auditStatus")Integer auditStatus);
 
+ /**
+  * @Author: ly
+  * @description:
+  *
+  *      数据统计 单位资质统计
+  * @date: 2020/6/4
+  * @param
+  * @return: java.util.List<com.aaa.six.model.MappingUnitLevelNum>
+  *
+  */
+   List<MappingUnitLevelNum> getUnitLevelNum();
 }

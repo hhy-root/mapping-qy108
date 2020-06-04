@@ -3,8 +3,10 @@ package com.aaa.six.controller;
 import com.aaa.six.base.BaseController;
 import com.aaa.six.base.ResultData;
 import com.aaa.six.model.MappingUnit;
+import com.aaa.six.model.MappingUnitLevelNum;
 import com.aaa.six.service.IQYMappingUnitService;
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +21,7 @@ import java.util.List;
  *          系统主页-测绘单位
  **/
 @RestController
+@Api(value = "单位管理", tags = "单位管理")
 public class MappingUnitController extends BaseController {
 
     @Autowired
@@ -165,6 +168,49 @@ public class MappingUnitController extends BaseController {
         PageInfo pageInfo = iqyMappingUnitService.selectUnitAudit(pageNo, pageSize, unitName, auditStatus);
         if (pageInfo != null) {
             return selectSuccess(pageInfo);
+        }
+        return selectFailed();
+    }
+
+    /**
+     * @Author: ly
+     * @description:
+     *
+     *      数据统计 单位资质统计
+     * @date: 2020/6/2
+     * @param
+     * @return: com.aaa.six.base.ResultData
+     *
+     */
+    @GetMapping("/getUnitLevelNum")
+    public ResultData getUnitLevelNum(){
+        List<MappingUnitLevelNum> unitLevelNum = iqyMappingUnitService.getUnitLevelNum();
+
+        if(unitLevelNum.size()>0){
+            return selectSuccess(unitLevelNum);
+        }
+
+        return selectFailed();
+
+    }
+
+    /**
+     * @Author: ly
+     * @description:
+     *
+     *      数据统计  单位信息统计
+     * @date: 2020/6/2
+     * @param pageNo
+     * @param pageSize
+     * @return: com.aaa.six.base.ResultData
+     *
+     */
+    @PostMapping("/getAllUnit")
+    public ResultData getAllUnit(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
+        PageInfo allUnit = iqyMappingUnitService.getAllUnit(pageNo, pageSize);
+
+        if(null != allUnit && !"".equals(allUnit)){
+            return selectSuccess(allUnit);
         }
         return selectFailed();
     }

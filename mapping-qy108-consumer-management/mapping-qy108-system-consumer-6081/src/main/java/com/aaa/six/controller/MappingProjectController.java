@@ -1,5 +1,6 @@
 package com.aaa.six.controller;
 
+import com.aaa.six.model.MappingProjectTypeNum;
 import com.aaa.six.service.IQYMappingProjectService;
 import com.aaa.six.base.BaseController;
 import com.aaa.six.base.ResultData;
@@ -163,4 +164,22 @@ public class MappingProjectController extends BaseController{
         return selectFailed();
     }
 
+    /**
+     * @Author: ly
+     * @description:
+     *
+     *      项目类型统计
+     * @date: 2020/6/2
+     * @param
+     * @return: com.aaa.six.base.ResultData
+     *
+     */
+    @GetMapping("/getProjectTypeNum")
+    public ResultData getProjectTypeNum(){
+        List<MappingProjectTypeNum> projectTypeNum = qyService.getProjectTypeNum();
+        if(null != projectTypeNum && projectTypeNum.size()>0){
+            return selectSuccess(projectTypeNum);
+        }
+        return null;
+    }
 }

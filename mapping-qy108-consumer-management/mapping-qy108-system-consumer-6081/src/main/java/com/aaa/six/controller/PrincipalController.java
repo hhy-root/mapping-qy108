@@ -5,6 +5,7 @@ import com.aaa.six.base.ResultData;
 import com.aaa.six.service.IQYPrincipalService;
 
 import com.aaa.six.model.Principal;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +21,7 @@ import java.util.List;
  *      单位负责人管理
  **/
 @RestController
+@Api(value = "单位负责人管理", tags = "单位负责人管理")
 public class PrincipalController extends BaseController {
 
     @Autowired
