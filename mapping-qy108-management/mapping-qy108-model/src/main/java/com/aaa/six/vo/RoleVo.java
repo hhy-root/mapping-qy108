@@ -1,5 +1,6 @@
-package com.aaa.six.model;
+package com.aaa.six.vo;
 
+import com.aaa.six.model.RoleMenu;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

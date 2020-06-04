@@ -1,12 +1,10 @@
-package com.aaa.six.model;
+package com.aaa.six.vo;
 
+import com.aaa.six.vo.RoleVo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-
-import java.io.Serializable;
-import java.util.List;
 
 /**
  * @Company AAA软件教育

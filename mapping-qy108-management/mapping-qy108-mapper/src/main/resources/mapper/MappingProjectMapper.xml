@@ -49,4 +49,28 @@
     <result column="contract_time" property="contractTime" jdbcType="VARCHAR" />
     <result column="coordinate" property="coordinate" jdbcType="LONGVARCHAR" />
   </resultMap>
+  <!--  查询未审核的项目（已提交）-->
+  <select id="selectNOAuditProject" resultMap="BaseResultMap">
+    select * from t_mapping_project where audit_status = 2
+  </select>
+  <!--  审核项目-->
+  <update id="auditProject" parameterType="java.lang.Long">
+    update from t_mapping_project set audit_status =0 where id= #{id}
+  </update>
+  <!--  查询审核通过的项目（项目信息）-->
+  <select id="selectAuditProject" resultMap="BaseResultMap">
+    select * from t_mapping_project where audit_status =0
+  </select>
+  <!--  查询项目成果汇交已提交（未审核）-->
+  <select id="selectNOAuditResults" resultMap="BaseResultMap">
+    select * from t_mapping_project where results_status = 2
+  </select>
+  <!--  审核项目成果汇交-->
+  <update id="auditResults" parameterType="java.lang.Long">
+    update from t_mapping_project set results_status =0 where id= #{id}
+  </update>
+  <!--  查询项目成果汇交通过-->
+  <select id="selectAuditResults" resultMap="BaseResultMap">
+    select * from t_mapping_project where results_status =0
+  </select>
 </mapper>

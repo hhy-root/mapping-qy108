@@ -169,7 +169,7 @@ public abstract class BaseService<T> {
      *@Date: 2020/5/23 9:43
      *@Return: T
      */
-    public T queryOne(Integer id) throws Exception{
+    public T queryOne(Long id) throws Exception{
         return mapper.selectByPrimaryKey(id);
     }
 

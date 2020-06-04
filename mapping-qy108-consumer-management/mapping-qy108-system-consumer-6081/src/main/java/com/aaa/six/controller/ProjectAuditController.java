@@ -4,6 +4,7 @@ import com.aaa.six.base.BaseController;
 import com.aaa.six.base.ResultData;
 import com.aaa.six.model.Audit;
 import com.aaa.six.model.MappingProject;
+import com.aaa.six.service.IQYProjectAuditService;
 import com.aaa.six.service.IQYService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
@@ -30,7 +31,7 @@ import java.util.HashMap;
 public class ProjectAuditController  extends BaseController {
 
     @Autowired
-    private IQYService qyService;
+    private IQYProjectAuditService projectAuditService;
 
     /**
      * @author hhy
@@ -44,7 +45,7 @@ public class ProjectAuditController  extends BaseController {
     @PostMapping("/selectNOAuditProject")
     @ApiOperation(value = "项目审核", notes = "查询未审核的项目信息")
     public ResultData selectNOAuditProject(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize) {
-        PageInfo<MappingProject> noAuditProject = qyService.selectNOAuditProject(pageNo, pageSize);
+        PageInfo<MappingProject> noAuditProject = projectAuditService.selectNOAuditProject(pageNo, pageSize);
         if(null != noAuditProject && !"".equals(noAuditProject) ){
             return selectSuccess(noAuditProject);
         }
@@ -63,7 +64,7 @@ public class ProjectAuditController  extends BaseController {
     @PostMapping("/selectAuditProject")
     @ApiOperation(value = "项目审核", notes = "查询审核通过的项目信息")
     public ResultData selectAuditProject(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize) {
-        PageInfo<MappingProject> auditProject = qyService.selectAuditProject(pageNo, pageSize);
+        PageInfo<MappingProject> auditProject = projectAuditService.selectAuditProject(pageNo, pageSize);
         if(null != auditProject && !"".equals(auditProject) ){
             return selectSuccess(auditProject);
         }
@@ -82,7 +83,7 @@ public class ProjectAuditController  extends BaseController {
     @PostMapping("/selectNOAuditResults")
     @ApiOperation(value = "项目审核", notes = "查询未审核的项目汇交")
     public ResultData selectNOAuditResults(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize) {
-        PageInfo<MappingProject> noAuditResults = qyService.selectNOAuditResults(pageNo, pageSize);
+        PageInfo<MappingProject> noAuditResults = projectAuditService.selectNOAuditResults(pageNo, pageSize);
         if(null != noAuditResults && !"".equals(noAuditResults) ){
             return selectSuccess(noAuditResults);
         }
@@ -101,7 +102,7 @@ public class ProjectAuditController  extends BaseController {
     @PostMapping("/selectAuditResults")
     @ApiOperation(value = "项目审核", notes = "查询审核通过的项目汇交")
     public ResultData selectAuditResults(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize) {
-        PageInfo<MappingProject> auditResults = qyService.selectAuditResults(pageNo, pageSize);
+        PageInfo<MappingProject> auditResults = projectAuditService.selectAuditResults(pageNo, pageSize);
         if(null != auditResults && !"".equals(auditResults) ){
             return selectSuccess(auditResults);
         }
@@ -120,7 +121,7 @@ public class ProjectAuditController  extends BaseController {
     @PostMapping("/toAudit")
     @ApiOperation(value = "项目审核", notes = "去审核")
     public ResultData toAudit(@RequestParam("id") Long id){
-        HashMap map = qyService.toAudit(id);
+        HashMap map = projectAuditService.toAudit(id);
         if(null != map && !"".equals(map) ){
             return selectSuccess(map);
         }
@@ -139,7 +140,7 @@ public class ProjectAuditController  extends BaseController {
     @PostMapping("/selectAuditLog")
     @ApiOperation(value = "项目审核", notes = "查询审核日志")
     public ResultData selectAuditLog(@RequestParam("id") Long id, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize) {
-        PageInfo<Audit> pageInfo = qyService.selectAuditLog(id, pageNo, pageSize);
+        PageInfo<Audit> pageInfo = projectAuditService.selectAuditLog(id, pageNo, pageSize);
         if(null != pageInfo && !"".equals(pageInfo) ){
             return selectSuccess(pageInfo);
         }
@@ -158,7 +159,7 @@ public class ProjectAuditController  extends BaseController {
     @PostMapping("/addAuditLog")
     @ApiOperation(value = "项目审核", notes = "添加审核日志")
     public ResultData addAuditLog(@RequestBody Audit audit) {
-        Integer integer = qyService.addAuditLog(audit);
+        Integer integer = projectAuditService.addAuditLog(audit);
         if(integer>0){
             return insertSuccess();
         }

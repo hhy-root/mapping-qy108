@@ -83,7 +83,7 @@
     WHERE id=#{id, jdbcType=BIGINT}
   </select>
 
-  <select id="selectUnitAudit" resultType="BaseResultMap" >
+  <select id="selectUnitAudit" resultMap="BaseResultMap" >
     select * from t_mapping_unit
     <where>
     1=1

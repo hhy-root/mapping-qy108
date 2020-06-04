@@ -20,7 +20,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-<<<<<<< HEAD
 import static com.aaa.six.staticstatus.TimeProperties.TIME_TYPE;
 
 /**
@@ -31,15 +30,6 @@ import static com.aaa.six.staticstatus.TimeProperties.TIME_TYPE;
  * @Date Create in 2020/5/28 16:32
  * @Description
  */
-import static com.aaa.six.staticstatus.TimeProperties.*;
-
-/**
- * @program: mapping-qy108
- * @author: lwq
- * @create: 2020-05-28 10:46
- * @description:
- **/
->>>>>>> origin/master
 @Slf4j
 @Aspect
 @Component
@@ -49,7 +39,6 @@ public class LogAspect {
     private IQYService iqyService;
 
     /**
-<<<<<<< HEAD
      * @author hhy
      * @description
      *    定义一个切面
@@ -97,38 +86,6 @@ public class LogAspect {
         for(Object arg : args){
             user = (User) arg;
         }
-=======
-     * @author lwq
-     * @description
-     *    定义一个切面
-     * @param: []
-     * @date 2020/5/28
-     * @return void
-     * @throws
-     **/
-    @Pointcut("@annotation(com.aaa.six.annotation.LoginLogAnnotation)")
-    public void pointcut(){
-
-    }
-
-    @Around("pointcut()")
-    public Object around(ProceedingJoinPoint proceedingJoinPoint) throws ClassNotFoundException {
-        // 1.定义返回值
-        Object result = null;
-        try {
-            result = proceedingJoinPoint.proceed();
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
-
-        // 2.获取username信息,其实username信息在方法的参数中，也就是说只要获取到了目标方法的参数就能拿到username的值
-        Object[] args = proceedingJoinPoint.getArgs();
-        User user = null;
-        for(Object arg : args) {
-            user = (User) arg;
-        }
-        System.out.println(user.getUsername());
->>>>>>> origin/master
 
         // 3.获取loginTime
         // 会使用到一个新的jar包，这个jar包是时间转换的一个工具类
@@ -169,7 +126,6 @@ public class LogAspect {
             }
         }
 
-<<<<<<< HEAD
         Map map = new HashMap();
         map.put("username",user.getUsername());
         map.put("login_time",dateTime);
@@ -183,19 +139,4 @@ public class LogAspect {
 
     }
 
-=======
-
-        Map map = new HashMap();
-        map.put("username", user.getUsername());
-        map.put("loginTime", dateTime);
-        map.put("ip", ip);
-        map.put("operationType", operationType);
-        map.put("operationName", operationName);
-
-        iqyService.addLoginLog(map);
-        // 如果不return则永远不会跳转回目标controller
-        return result;
-
-    }
->>>>>>> origin/master
 }

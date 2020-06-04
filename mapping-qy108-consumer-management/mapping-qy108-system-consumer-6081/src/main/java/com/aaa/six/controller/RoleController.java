@@ -1,11 +1,11 @@
 package com.aaa.six.controller;
 
-import com.aaa.six.service.IQYService;
+import com.aaa.six.service.IQYRoleService;
 import com.aaa.six.base.BaseController;
 import com.aaa.six.base.ResultData;
 import com.aaa.six.model.Role;
-import com.aaa.six.model.RoleMenuVo;
-import com.aaa.six.model.RoleVo;
+import com.aaa.six.vo.RoleMenuVo;
+import com.aaa.six.vo.RoleVo;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,7 +26,7 @@ import java.util.List;
 @Api(value = "角色信息", tags = "角色管理接口")
 public class RoleController extends BaseController {
     @Autowired
-    private IQYService qyService;
+    private IQYRoleService roleService;
 
     /**
      * @author hhy
@@ -40,7 +40,7 @@ public class RoleController extends BaseController {
     @PostMapping("/getAllRole")
     @ApiOperation(value = "查询所有角色信息", notes = "角色管理接口")
     public ResultData getAllRole(Role role,@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
-        PageInfo<Role> allRole = qyService.getAllRole(role,pageNo, pageSize);
+        PageInfo<Role> allRole = roleService.getAllRole(role,pageNo, pageSize);
         if(null != allRole) {
             return selectSuccess(allRole);
         }
@@ -59,7 +59,7 @@ public class RoleController extends BaseController {
     @PostMapping("/addRole")
     @ApiOperation(value = "添加角色", notes = "角色管理接口")
     public ResultData addRole(@RequestBody RoleVo roleVo){
-        Integer i = qyService.addRole(roleVo);
+        Integer i = roleService.addRole(roleVo);
         if(null != i && !"".equals(i)) {
             return insertSuccess();
         }
@@ -78,7 +78,7 @@ public class RoleController extends BaseController {
     @PostMapping("/deleteRole")
     @ApiOperation(value = "删除角色", notes = "角色管理接口")
     public ResultData deleteRole(@RequestBody List<Object> ids){
-        Integer d = qyService.deleteRole(ids);
+        Integer d = roleService.deleteRole(ids);
         if(null != d && !"".equals(d)) {
             return deleteSuccess();
         }
@@ -88,7 +88,7 @@ public class RoleController extends BaseController {
     @PostMapping("/toUpdateRole/{id}")
     @ApiOperation(value = "查询这个角色信息", notes = "角色管理接口")
     public ResultData toUpdateRole(@RequestParam("id") Long id){
-        List list = qyService.toUpdateRole(id);
+        List list = roleService.toUpdateRole(id);
         if(list.size()>0) {
             return selectSuccess(list);
         }
@@ -98,7 +98,7 @@ public class RoleController extends BaseController {
     @PostMapping("/updateRole")
     @ApiOperation(value = "修改角色信息", notes = "角色管理接口")
     public ResultData toUpdateRole(@RequestBody RoleMenuVo roleMenuVo){
-        Boolean aBoolean = qyService.updateRole(roleMenuVo);
+        Boolean aBoolean = roleService.updateRole(roleMenuVo);
         if(aBoolean) {
             return updateSuccess();
         }

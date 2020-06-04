@@ -3,19 +3,14 @@ package com.aaa.six.service;
 import com.aaa.six.base.BaseService;
 import com.aaa.six.mapper.RoleMapper;
 import com.aaa.six.mapper.RoleMenuMapper;
-import com.aaa.six.model.Menu;
 import com.aaa.six.model.Role;
 import com.aaa.six.model.RoleMenu;
-import com.aaa.six.model.RoleVo;
+import com.aaa.six.vo.RoleVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tk.mybatis.mapper.entity.Example;
-import tk.mybatis.mapper.util.Sqls;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**

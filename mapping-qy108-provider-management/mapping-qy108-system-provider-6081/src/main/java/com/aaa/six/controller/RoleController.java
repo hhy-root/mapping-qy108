@@ -1,11 +1,12 @@
 package com.aaa.six.controller;
 
-import com.aaa.six.base.BaseService;
-import com.aaa.six.base.CommonController;
 import com.aaa.six.model.*;
 import com.aaa.six.service.MenuService;
 import com.aaa.six.service.RoleMenuService;
 import com.aaa.six.service.RoleService;
+import com.aaa.six.vo.MenuVo;
+import com.aaa.six.vo.RoleMenuVo;
+import com.aaa.six.vo.RoleVo;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -115,7 +116,7 @@ public class RoleController  {
             //通过角色id查询当前角色所拥有的权限
             List<RoleMenu> menuList = roleMenuService.select(id);
             //查询所有权限
-            List<Menu> allMenu = menuService.getAllMenu();
+            List<MenuVo> allMenu = menuService.selectMenuByParentId(0);
             if(null != menuList && !"".equals(menuList) && null != allMenu && !"".equals(allMenu)){
                 list.add(menuList);
                 list.add(allMenu);
