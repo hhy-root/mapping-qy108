@@ -4,12 +4,14 @@ import com.aaa.six.base.BaseService;
 import com.aaa.six.mapper.AuditMapper;
 import com.aaa.six.model.Audit;
 import com.aaa.six.model.MappingProject;
+import com.aaa.six.utils.DateUtils;
 import com.aaa.six.utils.IDUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -55,7 +57,7 @@ public class AuditService extends BaseService<Audit> {
    /**
     * @author hhy
     * @description
-    *    重写新增方法，设置唯一主键
+    *   设置唯一主键 审核信息添加
     * @param: [audit]
     * @date 2020/6/2 17:04
     * @return java.lang.Integer

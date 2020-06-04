@@ -3,7 +3,9 @@ package com.aaa.six.service;
 import com.aaa.six.base.BaseModel;
 import com.aaa.six.base.BaseService;
 import com.aaa.six.mapper.MappingProjectMapper;
+import com.aaa.six.model.Audit;
 import com.aaa.six.model.MappingProject;
+import com.aaa.six.model.MappingUnit;
 import com.aaa.six.utils.DateUtils;
 import com.aaa.six.utils.IDUtils;
 import com.github.pagehelper.PageHelper;
@@ -34,7 +36,8 @@ public class MappingProjectService extends BaseService<MappingProject> {
     @Autowired
     private MappingProjectMapper mappingProjectMapper;
 
-
+    @Autowired
+    private AuditService auditService;
 
     /**
      *@Description: TODO
@@ -110,8 +113,20 @@ public class MappingProjectService extends BaseService<MappingProject> {
 
     @Override
     public Integer update(MappingProject mappingProject){
-        mappingProject.setCreateTime(DateUtils.getCurrentDate());
         try {
+            MappingProject mappingProject1 = mappingProjectMapper.selectByPrimaryKey(mappingProject.getId());
+            mappingProject.setCreateTime(DateUtils.getCurrentDate());
+            //通过id查询当前修改表  对比修改前后的status 如果修改  加入审核表
+            if (!mappingProject1.getAuditStatus().equals(mappingProject.getAuditStatus())) {
+                Audit audit = new Audit();
+                audit.setName("项目登记审核");
+                audit.setUserId(mappingProject.getUserId());
+                audit.setStatus(mappingProject.getAuditStatus());
+                audit.setMemo(mappingProject.getMemo());
+                audit.setRefId(mappingProject.getId());
+                auditService.add(audit);
+                return super.update(mappingProject);
+            }
             return super.update(mappingProject);
         } catch (Exception e) {
             e.printStackTrace();

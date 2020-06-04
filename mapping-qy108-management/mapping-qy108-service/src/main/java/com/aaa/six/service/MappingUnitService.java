@@ -3,6 +3,7 @@ package com.aaa.six.service;
 import com.aaa.six.base.BaseService;
 import com.aaa.six.mapper.MappingProjectMapper;
 import com.aaa.six.mapper.MappingUnitMapper;
+import com.aaa.six.model.Audit;
 import com.aaa.six.model.MappingUnit;
 import com.aaa.six.utils.DateUtils;
 import com.aaa.six.utils.IDUtils;
@@ -28,7 +29,8 @@ public class MappingUnitService extends BaseService<MappingUnit> {
     @Autowired
     private MappingUnitMapper mappingUnitMapper;
 
-
+    @Autowired
+    private AuditService auditService;
     /**
      * @author lwq 
      * @description
@@ -143,11 +145,25 @@ public class MappingUnitService extends BaseService<MappingUnit> {
      *@Return: java.lang.Integer
      */
     public Integer updateUnitOne(MappingUnit mappingUnit){
+
         try {
-            return super.update(mappingUnit);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            MappingUnit mappingUnit1 = mappingUnitMapper.selectByPrimaryKey(mappingUnit.getId());
+            //通过id查询当前修改表  对比修改前后的status 如果修改  加入审核表
+            if (!mappingUnit1.getAuditStatus().equals(mappingUnit.getAuditStatus())) {
+                Audit audit = new Audit();
+                audit.setName("注册单位审核");
+                audit.setUserId(mappingUnit.getUserId());
+                audit.setStatus(mappingUnit.getAuditStatus());
+                audit.setMemo(mappingUnit.getMemo());
+                audit.setRefId(mappingUnit.getId());
+                auditService.add(audit);
+                return super.update(mappingUnit);
+            }
+                return super.update(mappingUnit);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         return null;
     }
 
